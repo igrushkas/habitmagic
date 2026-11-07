@@ -8026,3 +8026,10 @@ body.light-mode .founder-commitment {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* TEMPORARILY HIDDEN: public founding-member "spots remaining" counter.
+   Underlying counter code in app.js is untouched. To bring it back at launch,
+   delete this block, run ./build.sh and redeploy. */
+.hero-spots,
+.early-adopter-spots,
+.founding-spots-line { display: none !important; }
