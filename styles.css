@@ -8033,7 +8033,9 @@ body.light-mode .founder-commitment {
 .hero-spots,
 .early-adopter-spots,
 .founding-spots-line,
-.founding-promo-hidden { display: none !important; }
+.founding-promo-hidden,
+.landing-early-adopter,      /* "Be a Founding Member" section */
+.landing-nav .beta-badge { display: none !important; }  /* "Early Access" badge */
 /* Close the blank space left where the counter used to be */
 .landing-hero { padding-bottom: 24px; }
 
@@ -8047,3 +8049,50 @@ body.light-mode .founder-commitment {
 .landing-how-step strong { color: var(--text-primary); font-size: 1rem; }
 .landing-how-num { width: 30px; height: 30px; border-radius: 50%; background: var(--accent-primary); color: #fff; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
 @media (max-width: 700px) { .landing-how-steps { grid-template-columns: 1fr; } }
+
+/* ==========================================
+   LANDING: COMPACT FEATURE GRID
+   Icon on top, one-line explanation underneath, all in one row on desktop.
+   (Replaces the tall alternating left/right rows. To restore the old
+   layout, delete this block, run ./build.sh and redeploy.)
+   ========================================== */
+.landing-features {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    padding: 4px 24px 28px;
+}
+.landing-features .feature-block,
+.landing-features .feature-block.feature-alt {
+    flex-direction: column-reverse;   /* icon (visual) above the text */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 16px 12px;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+.landing-features .feature-content { flex: 0 1 auto; }
+.landing-features .feature-visual {
+    flex: 0 0 auto;
+    min-height: 0;
+    background: none;
+    border: 0;
+}
+.landing-features .feature-placeholder { font-size: 1.7rem; opacity: 1; }
+.landing-features .feature-tag { display: none; }
+.landing-features .feature-block h2 { font-size: 1rem; margin-bottom: 4px; }
+.landing-features .feature-block p { font-size: 0.82rem; line-height: 1.45; }
+@media (max-width: 1000px) {
+    .landing-features { grid-template-columns: repeat(6, 1fr); }
+    .landing-features .feature-block { grid-column: span 2; }
+    .landing-features .feature-block:nth-child(n+4) { grid-column: span 3; }
+}
+@media (max-width: 560px) {
+    .landing-features { grid-template-columns: 1fr 1fr; gap: 10px; padding: 4px 16px 24px; }
+    .landing-features .feature-block,
+    .landing-features .feature-block:nth-child(n+4) { grid-column: auto; }
+    .landing-features .feature-block:last-child { grid-column: span 2; }
+}
