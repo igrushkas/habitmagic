@@ -1735,10 +1735,11 @@
             ];
 
             demoSeed.log = [
-                // Health & Energy (3)
+                // Health & Energy (4)
                 { id: 'dl1',  date: today, text: 'Morning workout 20 min',           category: 'health_energy',       xp: 20, timestamp: Date.now() - 43200000 },
-                { id: 'dl2',  date: today, text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, timestamp: Date.now() - 36000000 },
-                { id: 'dl3',  date: today, text: 'Prep healthy meal',                category: 'health_energy',       xp: 15, timestamp: Date.now() - 28800000 },
+                { id: 'dl2',  date: today, text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, timestamp: Date.now() - 39600000 },
+                { id: 'dl3',  date: today, text: 'Prep healthy meal',                category: 'health_energy',       xp: 15, timestamp: Date.now() - 36000000 },
+                { id: 'dl3b', date: today, text: 'Go for a 15 min walk',             category: 'health_energy',       xp: 15, timestamp: Date.now() - 32400000 },
                 // Relationships (3)
                 { id: 'dl4',  date: today, text: 'Call mom or a close friend',       category: 'relationships',       xp: 15, timestamp: Date.now() - 25200000 },
                 { id: 'dl5',  date: today, text: 'Plan a dinner or hangout',         category: 'relationships',       xp: 10, timestamp: Date.now() - 21600000 },
