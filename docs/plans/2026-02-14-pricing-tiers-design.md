@@ -7,18 +7,18 @@ Add 4-tier pricing (Free / Starter $9.99 / Pro $19.99 / Founding), mode locking 
 
 ## Tiers
 
-| Tier | Monthly | Annual | Modes | Outcomes | Notes |
-|------|---------|--------|-------|----------|-------|
-| Free | $0 | $0 | Personal Life | 3 max | Core features only |
-| Starter | $9.99 | $99/yr (save $21) | Life + Health | Unlimited | All features |
-| Pro | $19.99 | $179/yr (save $61) | All 4 | Unlimited | All features |
-| Founding | Free 3-6mo | - | All 4 | Unlimited | Must give daily feedback |
+| Tier | Monthly | Annual | Modes | Goals | Badges | Streaks | Key Features |
+|------|---------|--------|-------|-------|--------|---------|--------------|
+| Free | $0 | $0 | Personal Life | 3 max | 5 core | 7-day cap | Core features only |
+| Starter | $9.99 | $99/yr (save $21) | Life + Health | 10 max | 12 | 30-day cap | Focus Timer, Panic Button |
+| Pro | $19.99 | $179/yr (save $61) | All 4 | Unlimited | All 18 | Unlimited | Pick For Me, Priority Support |
+| Founding | Free 3-6mo | - | All 4 | Unlimited | All 18 | Unlimited | Must give daily feedback |
 
-## Mode Locking
-- Free: only `personal` mode. Tapping Business/Health/Finances shows upgrade modal.
-- Starter: `personal` + `health`. Tapping Business/Finances shows upgrade modal.
-- Pro/Founding/Trial: all 4 modes unlocked.
-- Outcome cap: free tier limited to 3 outcomes. Adding 4th shows upgrade.
+## Mode & Feature Locking
+- Free: only `personal` mode, 3 goals max, 7-day streak cap, 5 badges, no Focus Timer or Panic Button.
+- Starter: `personal` + `health`, 10 goals max, 30-day streak cap, 12 badges, Focus Timer + Panic Button. No Pick For Me.
+- Pro/Founding/Trial: all 4 modes unlocked, unlimited goals/streaks, all 18 badges, Pick For Me, priority support.
+- Tapping a locked mode shows upgrade modal. Exceeding goal cap shows upgrade.
 
 ## Feedback Enforcement (Founding Members)
 - Check `lastFeedbackDate` on login

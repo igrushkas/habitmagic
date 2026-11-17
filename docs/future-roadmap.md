@@ -2,15 +2,16 @@
 
 ## DONE (Completed Nov 2026)
 
-### ADHD-Friendly UI Redesign
-Complete UI overhaul for ADHD-friendliness. Single-task focus ("JUST DO THIS ONE THING"), maximizable focus mode, simplified forms, rounded consistent buttons (20px radius), typography harmonization (34 sizes consolidated to 23), boosted text contrast. Progressive disclosure: "More Options" removed from outcome forms, WHY field visible by default.
+### Brain-Friendly UI Redesign
+Complete UI overhaul for focus and simplicity. Single-task focus ("JUST DO THIS ONE THING"), maximizable focus mode, simplified forms, rounded consistent buttons (20px radius), typography harmonization (34 sizes consolidated to 23), boosted text contrast. Progressive disclosure: "More Options" removed from outcome forms, WHY field visible by default.
 
 ### Hormozi 3-Tier Pricing Model
-Implemented in-app pricing modal + landing page pricing section:
-- **Free**: 3 outcomes, Personal mode only
-- **Starter ($9.99/mo or $99/yr)**: Life + Health modes, unlimited outcomes
-- **Pro ($19.99/mo or $179/yr)**: All 4 modes, everything unlocked
+Implemented in-app pricing modal + landing page pricing section with differentiated feature caps to drive Pro upgrades:
+- **Free**: Personal mode, 3 goals, 5 badges, 7-day streak cap
+- **Starter ($9.99/mo or $99/yr)**: Life + Health modes, 10 goals, 12 badges, 30-day streak cap, Focus Timer, Panic Button
+- **Pro ($19.99/mo or $179/yr)**: All 4 modes, unlimited goals/streaks, all 18 badges, Pick For Me, priority support
 - Annual billing toggle with savings display and Hormozi value anchors
+- 30-day money-back guarantee
 - Checkout URLs are still Lemon Squeezy placeholders (Stripe migration pending)
 
 ### Focus Mode & PANIC Button
@@ -122,8 +123,8 @@ When paywalls are re-enabled, existing outcomes beyond the free limit (3) should
 ### 20. Rename Demo Mode Label
 Consider renaming to "Try Without Account" or "Quick Demo" with warning "Data saved on this device only." Currently says "Try Demo Mode" with 2-week expiration.
 
-### 21. Terms of Service & Privacy Policy Pages
-Add `/terms.html` and `/privacy.html` to the site with 14-day return policy. Link from landing page footer.
+### 21. Terms of Service & Privacy Policy Pages — DONE
+Added `/terms.html` and `/privacy.html` to the site with 30-day refund policy. Linked from landing page footer. Dark theme matching app design.
 
 ---
 
