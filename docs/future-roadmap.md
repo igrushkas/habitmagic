@@ -37,7 +37,7 @@ Badge + counter, 3-day feedback enforcement, inactivity revocation (14 days), au
 Auto-import events as tasks, map to categories (Business meeting -> Business mode, Doctor visit -> Health mode). Requires enabling Calendar API in Firebase console, requesting `calendar.readonly` scope during Google login, fetch events, filter, and map to actions with smart category assignment.
 
 ### 2. Auto-Break Large Tasks Nudge
-When someone enters a big vague action like "Build website", nudge them: "This sounds like a big one. Break it into 2-3 smaller bites? Your brain will thank you." Killer feature for ADHD users. Tasks should be under 20 minutes each.
+When someone enters a big vague action like "Build website", nudge them: "This sounds like a big one. Break it into 2-3 smaller bites? Your brain will thank you." Tasks should be under 20 minutes each.
 
 ### 3. Offline-to-Account Data Migration
 Demo mode data does NOT merge when user later signs in with Google. Data stays in separate localStorage key. Add migration so offline work gets merged into the user's account upon first sign-in.
@@ -98,9 +98,9 @@ The `firestore.rules` file in the repo is just a local reference. Firebase uses 
 - Pricing section: DONE (3-tier cards on landing page)
 
 ### 15. Reddit + TikTok Launch
-- Post in r/ADHD, r/adhdmeme, r/productivity communities
-- Create one TikTok/Reel showing the app (ADHD content goes viral)
-- DM 10 ADHD influencers on TikTok offering free lifetime access for a review
+- Post in r/productivity, r/getdisciplined communities
+- Create one TikTok/Reel showing the app (productivity content goes viral)
+- DM 10 productivity influencers on TikTok offering free lifetime access for a review
 
 ### 16. Google Search Console & SEO
 - Add myhabitmagic.com as a property in Google Search Console
@@ -128,4 +128,18 @@ Added `/terms.html` and `/privacy.html` to the site with 30-day refund policy. L
 
 ---
 
-*Last updated: November 2026*
+### 22. Blog / Content Engine
+Blog page at `/blog.html` with SEO-optimized articles published 2x/week. Topics: procrastination, focus, habit science, productivity tips. Each post has individual meta tags and CTA. Drives organic search traffic.
+
+### 23. Google Analytics (GA4)
+Measurement ID `G-QYPMGS8DKZ` installed on all pages (index, terms, privacy, resources, quiz, blog). Privacy policy updated with GA disclosure and opt-out link.
+
+### 24. Focus Quiz Lead Magnet
+8-question "How's Your Focus?" self-assessment at `/quiz.html`. Shareable results drive social traffic. No medical claims.
+
+### 25. Resources / SEO Content Page
+8 practical strategies page at `/resources.html`. Covers 2-Minute Rule, Pomodoro, Habit Stacking, etc. CTA to app.
+
+---
+
+*Last updated: November 17, 2026*

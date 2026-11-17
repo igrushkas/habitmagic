@@ -34,7 +34,7 @@ Add 4-tier pricing (Free / Starter $9.99 / Pro $19.99 / Founding), mode locking 
 ## Pricing UI (Hormozi Value Stack)
 - 3-column pricing cards with monthly/annual toggle
 - Annual shows effective monthly rate + total savings
-- Value anchors: "ADHD coaching: $200-500/mo", "Less than 2 coffees a week"
+- Value anchors: "Life coaching: $200-500/mo", "Less than 2 coffees a week"
 - Used in: upgrade modal (in-app), landing page, trial expiry screen
 
 ## Payment Integration
