@@ -37,10 +37,19 @@ Add 4-tier pricing (Free / Starter $9.99 / Pro $19.99 / Founding), mode locking 
 - Value anchors: "ADHD coaching: $200-500/mo", "Less than 2 coffees a week"
 - Used in: upgrade modal (in-app), landing page, trial expiry screen
 
-## LemonSqueezy Integration
-- 4 checkout URLs (Starter monthly, Starter annual, Pro monthly, Pro annual)
-- Placeholder URLs until products created
-- Pass uid + email as checkout params (existing pattern)
+## Payment Integration
+
+### Current: Lemon Squeezy (Placeholder)
+- 4 placeholder checkout URLs in `app.js` (`CHECKOUT_URLS` object)
+- URLs point to `myhabitmagic.lemonsqueezy.com/checkout/buy/STARTER_MONTHLY_PLACEHOLDER` etc.
+- Pass uid + email as Lemon Squeezy checkout params (`checkout[custom][uid]`, `checkout[email]`)
+
+### Planned: Stripe Migration
+- Migration to Stripe Payment Links planned
+- Stripe uses different query params: `client_reference_id` (for uid) and `prefilled_email`
+- Stripe Payment Links not yet provided by owner
+- Firebase Cloud Function webhook handler will need updating from Lemon Squeezy to Stripe
+- **IRS EIN pending** — owner cannot reach IRS to create EIN, required for Stripe business setup
 
 ## Files to Modify
 - `app.js`: userTier expansion, mode locking, feedback enforcement, waitlist promotion, pricing logic

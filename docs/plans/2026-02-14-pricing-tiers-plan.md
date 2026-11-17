@@ -1,12 +1,14 @@
 # Pricing Tiers Implementation Plan
 
+> **Status:** Tasks 1-8 are IMPLEMENTED. Checkout URLs remain Lemon Squeezy placeholders — Stripe Payment Links not yet provided by owner. IRS EIN pending.
+
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Add 4-tier pricing (Free/$9.99 Starter/$19.99 Pro/Founding), mode locking, 3-day feedback enforcement, waitlist auto-promotion, and Hormozi-style pricing UI with annual discounts.
 
 **Architecture:** Expand existing `userTier` variable from 2 values ('free'/'pro') to 4 ('free'/'starter'/'pro'/'founding'). Gate mode switching and outcome creation by tier. Add feedback date tracking to founding member engagement checks. Replace single upgrade modal with 3-tier pricing cards. LemonSqueezy placeholder URLs for 4 products.
 
-**Tech Stack:** Vanilla JS (app.js), HTML/CSS, Firebase Firestore, LemonSqueezy (checkout links)
+**Tech Stack:** Vanilla JS (app.js), HTML/CSS, Firebase Firestore, LemonSqueezy checkout links (Stripe migration pending)
 
 ---
 
