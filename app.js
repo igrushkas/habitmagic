@@ -1671,7 +1671,11 @@
         }
 
         // Seed demo with rich outcomes + log entries so Wheel, filters & Pick for Me all work
-        if (!localStorage.getItem(OFFLINE_STORAGE_KEY)) {
+        // Also re-seed if existing demo data is sparse (< 6 outcomes)
+        var _existingRaw = localStorage.getItem(OFFLINE_STORAGE_KEY);
+        var _existingData = _existingRaw ? JSON.parse(_existingRaw) : null;
+        var _needsSeed = !_existingRaw || !_existingData.outcomes || _existingData.outcomes.length < 6;
+        if (_needsSeed) {
             var today = new Date().toDateString();
             var demoSeed = defaultData();
             demoSeed.streak = 5;
