@@ -1654,6 +1654,7 @@
 
     function startOfflineMode() {
         isOfflineMode = true;
+        isTrialUser = true; // unlock all Pro features in demo
         currentUser = null;
         activeStorageKey = OFFLINE_STORAGE_KEY;
 
