@@ -1333,13 +1333,13 @@
     };
 
     function canAccessMode(mode) {
-        if (isFoundingMember || isTrialUser) return true;
+        if (isOfflineMode || isFoundingMember || isTrialUser) return true;
         var allowed = TIER_ALLOWED_MODES[userTier] || TIER_ALLOWED_MODES.free;
         return allowed.indexOf(mode) !== -1;
     }
 
     function hasUnlimitedOutcomes() {
-        return userTier !== 'free' || isFoundingMember || isTrialUser;
+        return isOfflineMode || userTier !== 'free' || isFoundingMember || isTrialUser;
     }
 
     // ==========================================
@@ -1364,7 +1364,7 @@
     };
 
     function isProUser() {
-        return userTier === 'pro' || userTier === 'starter' || userTier === 'founding' || isFoundingMember || isTrialUser;
+        return isOfflineMode || userTier === 'pro' || userTier === 'starter' || userTier === 'founding' || isFoundingMember || isTrialUser;
     }
 
     function isTrialUser() {
@@ -1654,6 +1654,7 @@
 
     function startOfflineMode() {
         isOfflineMode = true;
+        isTrialUser = true; // unlock all Pro features in demo
         currentUser = null;
         activeStorageKey = OFFLINE_STORAGE_KEY;
 
@@ -1668,6 +1669,107 @@
             localStorage.removeItem(DEMO_STARTED_KEY);
             // Set fresh start date
             localStorage.setItem(DEMO_STARTED_KEY, new Date().toISOString());
+        }
+
+        // Always re-seed demo data to ensure all 6 categories are populated
+        if (true) {
+            var today = new Date().toDateString();
+            var demoSeed = defaultData();
+            demoSeed.streak = 5;
+            demoSeed.bestStreak = 12;
+            demoSeed.totalMomentum = 340;
+
+            var demoNow = Date.now();
+            function demoAction(text, cat, mins, doneDaysAgo) {
+                var done = doneDaysAgo != null;
+                var completedDate = done ? new Date(demoNow - doneDaysAgo * 86400000).toDateString() : null;
+                return { id: 'da_' + Math.random().toString(36).slice(2), text: text, categories: [cat], estMinutes: mins || 15, done: done, completedDate: completedDate };
+            }
+
+            demoSeed.outcomes = [
+                // Health & Energy
+                { id: 'do_health', result: 'Build Daily Energy Habits', purpose: 'Feel strong and energized every day', category: 'health_energy', actions: [
+                    demoAction('Morning workout 20 min', 'health_energy', 20, 0),
+                    demoAction('Drink 8 glasses of water', 'health_energy', 5, 1),
+                    demoAction('Prep healthy meal', 'health_energy', 30, 2),
+                    demoAction('Go for a 15 min walk', 'health_energy', 15),
+                    demoAction('Get 8 hours sleep', 'health_energy', 10, 3)
+                ]},
+                // Relationships
+                { id: 'do_rel', result: 'Strengthen My Relationships', purpose: 'Stay connected with people I love', category: 'relationships', actions: [
+                    demoAction('Call mom or a close friend', 'relationships', 20, 0),
+                    demoAction('Plan a dinner or hangout', 'relationships', 10, 2),
+                    demoAction('Write a thank you message', 'relationships', 5),
+                    demoAction('Check in on someone I haven\'t spoken to', 'relationships', 10, 4)
+                ]},
+                // Money & Finances
+                { id: 'do_money', result: 'Get My Finances in Order', purpose: 'Build financial security and peace of mind', category: 'money_finances', actions: [
+                    demoAction('Review bank statements', 'money_finances', 15, 0),
+                    demoAction('Set a weekly budget', 'money_finances', 20, 1),
+                    demoAction('Transfer to savings account', 'money_finances', 5, 3),
+                    demoAction('Cancel one unused subscription', 'money_finances', 10),
+                    demoAction('Research one investment option', 'money_finances', 25, 5)
+                ]},
+                // Career & Contribution
+                { id: 'do_career', result: 'Grow My Career', purpose: 'Make meaningful progress every week', category: 'career_contribution', actions: [
+                    demoAction('Work on portfolio project 30 min', 'career_contribution', 30, 0),
+                    demoAction('Apply to one job', 'career_contribution', 45, 1),
+                    demoAction('Update LinkedIn profile', 'career_contribution', 20, 4),
+                    demoAction('Learn one new skill or tool', 'career_contribution', 30)
+                ]},
+                // Personal Growth
+                { id: 'do_growth', result: 'Invest in My Growth', purpose: 'Become 1% better every day', category: 'personal_growth', actions: [
+                    demoAction('Read 20 minutes', 'personal_growth', 20, 0),
+                    demoAction('Listen to a podcast or audiobook', 'personal_growth', 30, 2),
+                    demoAction('Journal for 10 minutes', 'personal_growth', 10, 1),
+                    demoAction('Practice a language 15 min', 'personal_growth', 15, 3),
+                    demoAction('Complete one online lesson', 'personal_growth', 25)
+                ]},
+                // Fun & Environment
+                { id: 'do_fun', result: 'Create a Space I Love', purpose: 'Live in a clean, inspiring environment', category: 'fun_environment', actions: [
+                    demoAction('Declutter one drawer or shelf', 'fun_environment', 15, 1),
+                    demoAction('Clean desk and workspace', 'fun_environment', 20, 0),
+                    demoAction('Do something fun just for me', 'fun_environment', 30),
+                    demoAction('Buy one thing that makes home nicer', 'fun_environment', 15, 5)
+                ]}
+            ];
+
+            var d1 = new Date(); d1.setDate(d1.getDate() - 1); var yesterday = d1.toDateString();
+            var d2 = new Date(); d2.setDate(d2.getDate() - 2); var twoDaysAgo = d2.toDateString();
+            var d3 = new Date(); d3.setDate(d3.getDate() - 3); var threeDaysAgo = d3.toDateString();
+
+            demoSeed.log = [
+                // TODAY — 5 victories
+                { id: 'dl1',  date: today,       text: 'Morning workout 20 min',           category: 'health_energy',       xp: 20, points: 20, timestamp: Date.now() - 14400000 },
+                { id: 'dl2',  date: today,       text: 'Read 20 minutes',                  category: 'personal_growth',     xp: 15, points: 15, timestamp: Date.now() - 10800000 },
+                { id: 'dl3',  date: today,       text: 'Review bank statements',           category: 'money_finances',      xp: 20, points: 20, timestamp: Date.now() - 7200000  },
+                { id: 'dl4',  date: today,       text: 'Work on portfolio project 30 min', category: 'career_contribution', xp: 25, points: 25, timestamp: Date.now() - 3600000  },
+                { id: 'dl5',  date: today,       text: 'Call mom or a close friend',       category: 'relationships',       xp: 15, points: 15, timestamp: Date.now() - 1800000  },
+                // YESTERDAY
+                { id: 'dl6',  date: yesterday,   text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, points: 10, timestamp: Date.now() - 86400000 },
+                { id: 'dl7',  date: yesterday,   text: 'Clean desk and workspace',         category: 'fun_environment',     xp: 15, points: 15, timestamp: Date.now() - 90000000 },
+                { id: 'dl8',  date: yesterday,   text: 'Journal for 10 minutes',           category: 'personal_growth',     xp: 15, points: 15, timestamp: Date.now() - 93600000 },
+                { id: 'dl9',  date: yesterday,   text: 'Set a weekly budget',              category: 'money_finances',      xp: 20, points: 20, timestamp: Date.now() - 97200000 },
+                // 2 DAYS AGO
+                { id: 'dl10', date: twoDaysAgo,  text: 'Apply to one job',                 category: 'career_contribution', xp: 30, points: 30, timestamp: Date.now() - 172800000 },
+                { id: 'dl11', date: twoDaysAgo,  text: 'Plan a dinner or hangout',         category: 'relationships',       xp: 10, points: 10, timestamp: Date.now() - 176400000 },
+                { id: 'dl12', date: twoDaysAgo,  text: 'Go for a 15 min walk',             category: 'health_energy',       xp: 15, points: 15, timestamp: Date.now() - 180000000 },
+                // 3 DAYS AGO
+                { id: 'dl13', date: threeDaysAgo, text: 'Declutter one drawer or shelf',   category: 'fun_environment',     xp: 15, points: 15, timestamp: Date.now() - 259200000 },
+                { id: 'dl14', date: threeDaysAgo, text: 'Complete one online lesson',      category: 'personal_growth',     xp: 20, points: 20, timestamp: Date.now() - 262800000 },
+                { id: 'dl15', date: threeDaysAgo, text: 'Transfer to savings account',     category: 'money_finances',      xp: 15, points: 15, timestamp: Date.now() - 266400000 }
+            ];
+
+            var demoToday = new Date().toDateString();
+            demoSeed.badges = [
+                { id: 'first_blood',     date: threeDaysAgo, count: 1 },
+                { id: 'hat_trick',       date: demoToday,    count: 3 },
+                { id: 'pentakill',       date: demoToday,    count: 2 },
+                { id: 'streak_master',   date: yesterday,    count: 1 },
+                { id: 'category_sweep',  date: yesterday,    count: 1 }
+            ];
+            localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
+            data = null; // force reload from fresh seed
         }
 
         showApp();
@@ -8460,7 +8562,14 @@
                 if (user) {
                     onAuthReady(user);
                 } else {
-                    showLoginScreen();
+                    // Resume demo mode if demo data exists and hasn't expired
+                    var demoStarted = localStorage.getItem(DEMO_STARTED_KEY);
+                    var demoData = localStorage.getItem(OFFLINE_STORAGE_KEY);
+                    if (demoStarted && demoData && !isDemoExpired()) {
+                        startOfflineMode();
+                    } else {
+                        showLoginScreen();
+                    }
                 }
             });
         } else {
