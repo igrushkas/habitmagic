@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Habit Magic — Your daily habit and goal tracker with gamified dopamine hits. Set outcomes, track actions, build streaks, earn badges, and level up your life. Personal Life & Business modes with focus timer, combo multipliers, and weekly power scores.">
-    <meta name="keywords" content="habit tracker, goal tracker, gamified productivity, streak tracker, dopamine hits, daily habits, action planner, personal growth, business goals, focus timer">
+    <meta name="description" content="A gamified habit tracker built for ADHD brains. One task at a time, Bad Day Mode, XP & streaks that actually motivate. Try free in your browser — no signup needed.">
+    <meta name="keywords" content="adhd habit tracker, habit tracker for adhd adults, adhd planner app, adhd productivity app, gamified habit tracker, adhd daily routine app, executive dysfunction app, goal tracker, focus timer">
     <meta name="author" content="Habit Magic">
+    <link rel="canonical" href="https://myhabitmagic.com/">
 
     <!-- Open Graph / Social Sharing -->
-    <meta property="og:title" content="Habit Magic — Gamified Habit & Goal Tracker">
-    <meta property="og:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress. Personal Life & Business modes.">
+    <meta property="og:title" content="Habit Magic — ADHD-Friendly Habit Tracker & Daily Planner">
+    <meta property="og:description" content="A habit tracker that works WITH your ADHD brain. Pick-for-me tasks, Bad Day Mode, XP & streaks. Try free in your browser — no signup.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://myhabitmagic.com">
     <meta property="og:site_name" content="Habit Magic">
+    <meta property="og:image" content="https://myhabitmagic.com/icons/icon-512.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Habit Magic — Gamified Habit & Goal Tracker">
-    <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
+    <meta name="twitter:title" content="Habit Magic — ADHD-Friendly Habit Tracker & Daily Planner">
+    <meta name="twitter:description" content="Built for ADHD brains: one task at a time, Bad Day Mode, rewards that work. Free demo, no signup.">
+    <meta name="twitter:image" content="https://myhabitmagic.com/icons/icon-512.png">
 
-    <title>Habit Magic - Goal Tracker</title>
+    <!-- Structured data for search engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Habit Magic",
+      "url": "https://myhabitmagic.com",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "description": "A gamified habit and goal tracker designed for ADHD brains: single-task focus, Pick-For-Me task selection, Bad Day Mode, XP, streaks and badges.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <title>Habit Magic — ADHD-Friendly Habit Tracker & Daily Planner</title>
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -31,7 +48,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r27">
+    <link rel="stylesheet" href="styles.min.css?v=20260806r1">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -61,7 +78,7 @@
             <div class="landing-hero-inner">
                 <div class="hero-badge">Built for ADHD brains &amp; busy humans</div>
                 <h1 class="hero-title">Finally &mdash; a productivity app that works <em>with</em> your brain</h1>
-                <p class="hero-subtitle">Gamified habit tracking with dopamine-friendly rewards, zero decision fatigue, and one-task focus. 100 founding members get <strong class="hero-free-highlight">6 months free</strong> &mdash; just share daily feedback to help us build it for you.</p>
+                <p class="hero-subtitle">Gamified habit tracking with dopamine-friendly rewards, zero decision fatigue, and one-task focus. The first <strong class="hero-free-highlight">20 founding members get 6 months free</strong> &mdash; no strings attached.</p>
                 <div class="hero-cta-group">
                     <button class="btn-google-login hero-cta" id="btnGoogleLogin">
                         <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
@@ -76,7 +93,7 @@
                 </div>
                 <div class="hero-spots">
                     <span class="founding-spots-pulse"></span>
-                    <span class="founding-spots-count">100</span> of 100 Founding Member spots remaining
+                    <span class="founding-spots-count">20</span> of 20 Founding Member spots remaining
                 </div>
             </div>
         </section>
@@ -224,9 +241,9 @@
         <section class="landing-early-adopter">
             <div class="early-adopter-inner">
                 <h2>&#127775; Be a Founding Member &mdash; Here&rsquo;s the Deal</h2>
-                <p class="early-adopter-desc">The first 100 users get <strong>6 months completely free</strong>. After that, you&rsquo;re locked in at a special founder&rsquo;s price &mdash; forever.</p>
+                <p class="early-adopter-desc">The first 20 users get <strong>6 months completely free</strong>. After that, you&rsquo;re locked in at a special founder&rsquo;s price &mdash; forever.</p>
                 <div class="early-adopter-spots">
-                    <div class="spots-counter-large founding-spots-count">100</div>
+                    <div class="spots-counter-large founding-spots-count">20</div>
                     <div class="spots-label-large">spots remaining</div>
                 </div>
 
@@ -238,7 +255,7 @@
                             <li>&#9989; Permanent Founding Member badge</li>
                             <li>&#9989; Grandfather pricing after free period</li>
                             <li>&#9989; Direct line to the developer</li>
-                            <li>&#9989; Shape the app&rsquo;s future with daily feedback</li>
+                            <li>&#9989; Your ideas shape the app&rsquo;s future</li>
                         </ul>
                     </div>
                     <div class="founder-col founder-col-no">
@@ -254,27 +271,27 @@
 
                 <div class="founder-commitment">
                     <h3>&#129309; Your Side of the Deal</h3>
-                    <p class="founder-commitment-desc">Free access isn&rsquo;t free-for-nothing. Founding members commit to:</p>
+                    <p class="founder-commitment-desc">Honestly? Just use it. That&rsquo;s it.</p>
                     <div class="commitment-items">
+                        <div class="commitment-item">
+                            <span class="commitment-icon">&#10024;</span>
+                            <div>
+                                <strong>Use It Your Way</strong>
+                                <span>No daily check-ins, no surveys, no obligations. Use it when it helps you.</span>
+                            </div>
+                        </div>
                         <div class="commitment-item">
                             <span class="commitment-icon">&#128172;</span>
                             <div>
-                                <strong>Daily Feedback</strong>
-                                <span>15-second checkbox form after 3+ actions. Helps us build what you need.</span>
+                                <strong>Speak Up If You Feel Like It</strong>
+                                <span>Something annoying? Something you love? Tell us &mdash; only if you want to.</span>
                             </div>
                         </div>
                         <div class="commitment-item">
                             <span class="commitment-icon">&#128227;</span>
                             <div>
-                                <strong>Tell a Friend</strong>
-                                <span>Share your referral link. More users = better app for everyone.</span>
-                            </div>
-                        </div>
-                        <div class="commitment-item">
-                            <span class="commitment-icon">&#128170;</span>
-                            <div>
-                                <strong>Stay Active</strong>
-                                <span>Use the app regularly. 14 days inactive = your spot opens for the waitlist.</span>
+                                <strong>Tell a Friend (Optional)</strong>
+                                <span>If it helps your brain, it&rsquo;ll probably help someone you know.</span>
                             </div>
                         </div>
                     </div>
@@ -299,16 +316,16 @@
                     <div class="faq-a">All features unlocked for 6 months free. After that, you&rsquo;re grandfathered at a special price &mdash; lower than anyone who joins later. Plus a permanent Founding Member badge and direct access to the developer.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">What&rsquo;s the &ldquo;daily feedback&rdquo; commitment?</div>
-                    <div class="faq-a">After you complete 3+ actions in a day, a quick checkbox form pops up. 5 questions, mostly checkboxes, takes about 15 seconds. It helps us know what&rsquo;s working and what to build next.</div>
+                    <div class="faq-q">Do I have to give feedback or do anything in return?</div>
+                    <div class="faq-a">Nope. No daily check-ins, no surveys, no obligations. If something bugs you or you have an idea, we&rsquo;d love to hear it &mdash; but only if you feel like sharing. Your spot is yours either way.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">What happens if all 100 spots are taken?</div>
-                    <div class="faq-a">You get a free 2-week trial of everything. If a founding member goes inactive for 14+ days, their spot opens up and we&rsquo;ll email waitlisted users.</div>
+                    <div class="faq-q">What happens if all 20 spots are taken?</div>
+                    <div class="faq-a">You get a free 2-week trial of everything, and we&rsquo;ll add you to the waitlist for the next founding cohort.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">Can I lose my founding member spot?</div>
-                    <div class="faq-a">Yes &mdash; if you miss daily feedback for 3+ days or are inactive for 14+ days. We send a warning first. Stay active, give feedback, and your spot is safe. If you lose it, you get a free 2-week trial while a waitlisted user gets your spot.</div>
+                    <div class="faq-a">No. Once you&rsquo;re in, you&rsquo;re in &mdash; no activity requirements, no penalties. Life with ADHD has enough deadlines already.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">What happens after the free period?</div>
@@ -373,13 +390,13 @@
                     <div class="landing-price-anchor">Just $10 more for double the modes</div>
                 </div>
             </div>
-            <p class="landing-pricing-note">&#127775; Or become a <strong>Founding Member</strong> &mdash; get everything free for 6 months. Just share daily feedback.</p>
+            <p class="landing-pricing-note">&#127775; Or become a <strong>Founding Member</strong> &mdash; get everything free for 6 months. No strings attached.</p>
         </section>
 
         <!-- Final CTA -->
         <section class="landing-final-cta">
             <h2>Ready to Work <em>With</em> Your Brain?</h2>
-            <p>100 founding member spots. 6 months free. Daily feedback keeps your access. No credit card.</p>
+            <p>20 founding member spots. 6 months free. No obligations. No credit card.</p>
             <button class="btn-google-login hero-cta" id="btnGoogleLoginBottom">
                 <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -390,7 +407,7 @@
                 Sign in with Google
             </button>
             <!-- Demo mode hidden for now -->
-            <div class="demo-mode-section landing-demo" style="display:none">
+            <div class="demo-mode-section landing-demo">
                 <p class="login-offline" id="btnOfflineMode"><a href="#">Try Demo Mode first</a></p>
                 <p class="demo-warning">&#128161; Demo data lives in this browser and expires in 2 weeks. Sign in anytime to save permanently.</p>
             </div>
@@ -1684,10 +1701,10 @@
         <div class="modal trial-welcome-modal">
             <button class="modal-close" onclick="document.getElementById('trialWelcomeOverlay').classList.add('hidden')">&times;</button>
             <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128075;</div>
-            <h2 style="text-align:center">All 100 Founding Spots Are Taken!</h2>
+            <h2 style="text-align:center">All 20 Founding Spots Are Taken!</h2>
             <p style="text-align:center;color:var(--text-secondary);margin-bottom:16px">But great news &mdash; you get a <strong style="color:var(--accent-yellow)">free 2-week trial</strong> of every feature.</p>
             <div style="background:rgba(108,92,231,0.08);border-radius:12px;padding:16px;margin-bottom:16px">
-                <p style="font-size:0.9rem;color:var(--text-secondary);margin:0">&#128231; If a founding member spot opens up, we&rsquo;ll email you at <strong id="trialUserEmail"></strong>. Founding members who don&rsquo;t stay active lose their spot &mdash; so keep using the app!</p>
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin:0">&#128231; If a founding member spot opens up, we&rsquo;ll email you at <strong id="trialUserEmail"></strong>. You&rsquo;re first in line for the next cohort!</p>
             </div>
             <button class="btn-primary btn-large" onclick="document.getElementById('trialWelcomeOverlay').classList.add('hidden')">Start My Free Trial &#128640;</button>
         </div>
@@ -1759,7 +1776,7 @@
             <div style="font-size:3rem;margin-bottom:12px">&#127881;&#127775;</div>
             <h2>You Got a Founding Spot!</h2>
             <p>A founding member spot just opened up and <strong>you&rsquo;re in!</strong></p>
-            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have <strong>6 months free</strong> access to everything. Just keep using the app, give daily feedback, and your spot is secure.</p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have <strong>6 months free</strong> access to everything. Your spot is yours &mdash; no obligations, just enjoy the app.</p>
             <button class="btn-primary" onclick="document.getElementById('waitlistCongratsOverlay').classList.add('hidden')" style="margin-top:16px">Let&rsquo;s Go! &#128170;</button>
         </div>
     </div>
@@ -1852,7 +1869,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r27"></script>
+    <script src="app.min.js?v=20260806r1"></script>
 
     <!-- Service Worker Registration -->
     <script>
