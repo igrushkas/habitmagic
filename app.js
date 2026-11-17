@@ -1671,10 +1671,10 @@
         }
 
         // Seed demo with rich outcomes + log entries so Wheel, filters & Pick for Me all work
-        // Also re-seed if existing demo data is sparse (< 6 outcomes)
+        // Re-seed if data is missing or log has fewer than 18 entries (sparse)
         var _existingRaw = localStorage.getItem(OFFLINE_STORAGE_KEY);
         var _existingData = _existingRaw ? JSON.parse(_existingRaw) : null;
-        var _needsSeed = !_existingRaw || !_existingData.outcomes || _existingData.outcomes.length < 6;
+        var _needsSeed = !_existingRaw || !_existingData.log || _existingData.log.length < 18;
         if (_needsSeed) {
             var today = new Date().toDateString();
             var demoSeed = defaultData();
@@ -8555,7 +8555,14 @@
                 if (user) {
                     onAuthReady(user);
                 } else {
-                    showLoginScreen();
+                    // Resume demo mode if demo data exists and hasn't expired
+                    var demoStarted = localStorage.getItem(DEMO_STARTED_KEY);
+                    var demoData = localStorage.getItem(OFFLINE_STORAGE_KEY);
+                    if (demoStarted && demoData && !isDemoExpired()) {
+                        startOfflineMode();
+                    } else {
+                        showLoginScreen();
+                    }
                 }
             });
         } else {
