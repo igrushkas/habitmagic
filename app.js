@@ -1678,9 +1678,12 @@
             demoSeed.bestStreak = 5;
             demoSeed.totalMomentum = 120;
             demoSeed.log = [
-                { id: 'demo1', date: today, text: 'Morning workout', category: 'health_energy', xp: 20, timestamp: Date.now() - 7200000 },
-                { id: 'demo2', date: today, text: 'Read 20 minutes', category: 'personal_growth', xp: 15, timestamp: Date.now() - 3600000 },
-                { id: 'demo3', date: today, text: 'Called a friend', category: 'relationships', xp: 15, timestamp: Date.now() - 1800000 }
+                { id: 'demo1', date: today, text: 'Morning workout', category: 'health_energy', xp: 20, timestamp: Date.now() - 36000000 },
+                { id: 'demo2', date: today, text: 'Read 20 minutes', category: 'personal_growth', xp: 15, timestamp: Date.now() - 28800000 },
+                { id: 'demo3', date: today, text: 'Called a friend', category: 'relationships', xp: 15, timestamp: Date.now() - 21600000 },
+                { id: 'demo4', date: today, text: 'Reviewed budget', category: 'money_finances', xp: 20, timestamp: Date.now() - 14400000 },
+                { id: 'demo5', date: today, text: 'Worked on side project', category: 'career_contribution', xp: 25, timestamp: Date.now() - 7200000 },
+                { id: 'demo6', date: today, text: 'Tidied up workspace', category: 'fun_environment', xp: 15, timestamp: Date.now() - 3600000 }
             ];
             localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
         }
