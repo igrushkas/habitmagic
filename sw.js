@@ -8,6 +8,8 @@ var CORE_ASSETS = [
     '/index.html',
     '/app.js',
     '/styles.css',
+    '/terms.html',
+    '/privacy.html',
     '/firebase-config.js',
     '/manifest.json',
     '/icons/icon-192.png',
