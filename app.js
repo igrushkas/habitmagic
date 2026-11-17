@@ -1761,6 +1761,7 @@
             ];
 
             localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
+            data = null; // force reload from fresh seed
         }
 
         showApp();
