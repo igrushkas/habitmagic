@@ -1670,6 +1670,21 @@
             localStorage.setItem(DEMO_STARTED_KEY, new Date().toISOString());
         }
 
+        // Seed demo with sample log entries so Wheel of Life is visible from the start
+        if (!localStorage.getItem(OFFLINE_STORAGE_KEY)) {
+            var today = new Date().toDateString();
+            var demoSeed = defaultData();
+            demoSeed.streak = 3;
+            demoSeed.bestStreak = 5;
+            demoSeed.totalMomentum = 120;
+            demoSeed.log = [
+                { id: 'demo1', date: today, text: 'Morning workout', category: 'health_energy', xp: 20, timestamp: Date.now() - 7200000 },
+                { id: 'demo2', date: today, text: 'Read 20 minutes', category: 'personal_growth', xp: 15, timestamp: Date.now() - 3600000 },
+                { id: 'demo3', date: today, text: 'Called a friend', category: 'relationships', xp: 15, timestamp: Date.now() - 1800000 }
+            ];
+            localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
+        }
+
         showApp();
         showDemoBanner();
         init();
