@@ -6,8 +6,8 @@ var CACHE_VERSION = 'habit-magic-20260217114539';
 var CORE_ASSETS = [
     '/',
     '/index.html',
-    '/app.min.js',
-    '/styles.min.css',
+    '/app.js',
+    '/styles.css',
     '/firebase-config.js',
     '/manifest.json',
     '/icons/icon-192.png',
