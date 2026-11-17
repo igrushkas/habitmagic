@@ -1740,26 +1740,34 @@
 
             demoSeed.log = [
                 // TODAY — 5 victories
-                { id: 'dl1',  date: today,       text: 'Morning workout 20 min',           category: 'health_energy',       xp: 20, timestamp: Date.now() - 14400000 },
-                { id: 'dl2',  date: today,       text: 'Read 20 minutes',                  category: 'personal_growth',     xp: 15, timestamp: Date.now() - 10800000 },
-                { id: 'dl3',  date: today,       text: 'Review bank statements',           category: 'money_finances',      xp: 20, timestamp: Date.now() - 7200000  },
-                { id: 'dl4',  date: today,       text: 'Work on portfolio project 30 min', category: 'career_contribution', xp: 25, timestamp: Date.now() - 3600000  },
-                { id: 'dl5',  date: today,       text: 'Call mom or a close friend',       category: 'relationships',       xp: 15, timestamp: Date.now() - 1800000  },
+                { id: 'dl1',  date: today,       text: 'Morning workout 20 min',           category: 'health_energy',       xp: 20, points: 20, timestamp: Date.now() - 14400000 },
+                { id: 'dl2',  date: today,       text: 'Read 20 minutes',                  category: 'personal_growth',     xp: 15, points: 15, timestamp: Date.now() - 10800000 },
+                { id: 'dl3',  date: today,       text: 'Review bank statements',           category: 'money_finances',      xp: 20, points: 20, timestamp: Date.now() - 7200000  },
+                { id: 'dl4',  date: today,       text: 'Work on portfolio project 30 min', category: 'career_contribution', xp: 25, points: 25, timestamp: Date.now() - 3600000  },
+                { id: 'dl5',  date: today,       text: 'Call mom or a close friend',       category: 'relationships',       xp: 15, points: 15, timestamp: Date.now() - 1800000  },
                 // YESTERDAY
-                { id: 'dl6',  date: yesterday,   text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, timestamp: Date.now() - 86400000 },
-                { id: 'dl7',  date: yesterday,   text: 'Clean desk and workspace',         category: 'fun_environment',     xp: 15, timestamp: Date.now() - 90000000 },
-                { id: 'dl8',  date: yesterday,   text: 'Journal for 10 minutes',           category: 'personal_growth',     xp: 15, timestamp: Date.now() - 93600000 },
-                { id: 'dl9',  date: yesterday,   text: 'Set a weekly budget',              category: 'money_finances',      xp: 20, timestamp: Date.now() - 97200000 },
+                { id: 'dl6',  date: yesterday,   text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, points: 10, timestamp: Date.now() - 86400000 },
+                { id: 'dl7',  date: yesterday,   text: 'Clean desk and workspace',         category: 'fun_environment',     xp: 15, points: 15, timestamp: Date.now() - 90000000 },
+                { id: 'dl8',  date: yesterday,   text: 'Journal for 10 minutes',           category: 'personal_growth',     xp: 15, points: 15, timestamp: Date.now() - 93600000 },
+                { id: 'dl9',  date: yesterday,   text: 'Set a weekly budget',              category: 'money_finances',      xp: 20, points: 20, timestamp: Date.now() - 97200000 },
                 // 2 DAYS AGO
-                { id: 'dl10', date: twoDaysAgo,  text: 'Apply to one job',                 category: 'career_contribution', xp: 30, timestamp: Date.now() - 172800000 },
-                { id: 'dl11', date: twoDaysAgo,  text: 'Plan a dinner or hangout',         category: 'relationships',       xp: 10, timestamp: Date.now() - 176400000 },
-                { id: 'dl12', date: twoDaysAgo,  text: 'Go for a 15 min walk',             category: 'health_energy',       xp: 15, timestamp: Date.now() - 180000000 },
+                { id: 'dl10', date: twoDaysAgo,  text: 'Apply to one job',                 category: 'career_contribution', xp: 30, points: 30, timestamp: Date.now() - 172800000 },
+                { id: 'dl11', date: twoDaysAgo,  text: 'Plan a dinner or hangout',         category: 'relationships',       xp: 10, points: 10, timestamp: Date.now() - 176400000 },
+                { id: 'dl12', date: twoDaysAgo,  text: 'Go for a 15 min walk',             category: 'health_energy',       xp: 15, points: 15, timestamp: Date.now() - 180000000 },
                 // 3 DAYS AGO
-                { id: 'dl13', date: threeDaysAgo, text: 'Declutter one drawer or shelf',   category: 'fun_environment',     xp: 15, timestamp: Date.now() - 259200000 },
-                { id: 'dl14', date: threeDaysAgo, text: 'Complete one online lesson',      category: 'personal_growth',     xp: 20, timestamp: Date.now() - 262800000 },
-                { id: 'dl15', date: threeDaysAgo, text: 'Transfer to savings account',     category: 'money_finances',      xp: 15, timestamp: Date.now() - 266400000 }
+                { id: 'dl13', date: threeDaysAgo, text: 'Declutter one drawer or shelf',   category: 'fun_environment',     xp: 15, points: 15, timestamp: Date.now() - 259200000 },
+                { id: 'dl14', date: threeDaysAgo, text: 'Complete one online lesson',      category: 'personal_growth',     xp: 20, points: 20, timestamp: Date.now() - 262800000 },
+                { id: 'dl15', date: threeDaysAgo, text: 'Transfer to savings account',     category: 'money_finances',      xp: 15, points: 15, timestamp: Date.now() - 266400000 }
             ];
 
+            var demoToday = new Date().toDateString();
+            demoSeed.badges = [
+                { id: 'first_blood',     date: threeDaysAgo, count: 1 },
+                { id: 'hat_trick',       date: demoToday,    count: 3 },
+                { id: 'pentakill',       date: demoToday,    count: 2 },
+                { id: 'streak_master',   date: yesterday,    count: 1 },
+                { id: 'category_sweep',  date: yesterday,    count: 1 }
+            ];
             localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
             data = null; // force reload from fresh seed
         }
