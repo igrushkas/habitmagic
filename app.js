@@ -1333,13 +1333,13 @@
     };
 
     function canAccessMode(mode) {
-        if (isFoundingMember || isTrialUser) return true;
+        if (isOfflineMode || isFoundingMember || isTrialUser) return true;
         var allowed = TIER_ALLOWED_MODES[userTier] || TIER_ALLOWED_MODES.free;
         return allowed.indexOf(mode) !== -1;
     }
 
     function hasUnlimitedOutcomes() {
-        return userTier !== 'free' || isFoundingMember || isTrialUser;
+        return isOfflineMode || userTier !== 'free' || isFoundingMember || isTrialUser;
     }
 
     // ==========================================
