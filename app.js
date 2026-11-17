@@ -1364,7 +1364,7 @@
     };
 
     function isProUser() {
-        return userTier === 'pro' || userTier === 'starter' || userTier === 'founding' || isFoundingMember || isTrialUser;
+        return isOfflineMode || userTier === 'pro' || userTier === 'starter' || userTier === 'founding' || isFoundingMember || isTrialUser;
     }
 
     function isTrialUser() {
@@ -1679,55 +1679,58 @@
             demoSeed.bestStreak = 12;
             demoSeed.totalMomentum = 340;
 
-            function demoAction(text, cat, mins) {
-                return { id: 'da_' + Math.random().toString(36).slice(2), text: text, categories: [cat], estMinutes: mins || 15, done: false, completedDate: null };
+            var demoNow = Date.now();
+            function demoAction(text, cat, mins, doneDaysAgo) {
+                var done = doneDaysAgo != null;
+                var completedDate = done ? new Date(demoNow - doneDaysAgo * 86400000).toDateString() : null;
+                return { id: 'da_' + Math.random().toString(36).slice(2), text: text, categories: [cat], estMinutes: mins || 15, done: done, completedDate: completedDate };
             }
 
             demoSeed.outcomes = [
                 // Health & Energy
                 { id: 'do_health', result: 'Build Daily Energy Habits', purpose: 'Feel strong and energized every day', category: 'health_energy', actions: [
-                    demoAction('Morning workout 20 min', 'health_energy', 20),
-                    demoAction('Drink 8 glasses of water', 'health_energy', 5),
-                    demoAction('Prep healthy meal', 'health_energy', 30),
+                    demoAction('Morning workout 20 min', 'health_energy', 20, 0),
+                    demoAction('Drink 8 glasses of water', 'health_energy', 5, 1),
+                    demoAction('Prep healthy meal', 'health_energy', 30, 2),
                     demoAction('Go for a 15 min walk', 'health_energy', 15),
-                    demoAction('Get 8 hours sleep', 'health_energy', 10)
+                    demoAction('Get 8 hours sleep', 'health_energy', 10, 3)
                 ]},
                 // Relationships
                 { id: 'do_rel', result: 'Strengthen My Relationships', purpose: 'Stay connected with people I love', category: 'relationships', actions: [
-                    demoAction('Call mom or a close friend', 'relationships', 20),
-                    demoAction('Plan a dinner or hangout', 'relationships', 10),
+                    demoAction('Call mom or a close friend', 'relationships', 20, 0),
+                    demoAction('Plan a dinner or hangout', 'relationships', 10, 2),
                     demoAction('Write a thank you message', 'relationships', 5),
-                    demoAction('Check in on someone I haven\'t spoken to', 'relationships', 10)
+                    demoAction('Check in on someone I haven\'t spoken to', 'relationships', 10, 4)
                 ]},
                 // Money & Finances
                 { id: 'do_money', result: 'Get My Finances in Order', purpose: 'Build financial security and peace of mind', category: 'money_finances', actions: [
-                    demoAction('Review bank statements', 'money_finances', 15),
-                    demoAction('Set a weekly budget', 'money_finances', 20),
-                    demoAction('Transfer to savings account', 'money_finances', 5),
+                    demoAction('Review bank statements', 'money_finances', 15, 0),
+                    demoAction('Set a weekly budget', 'money_finances', 20, 1),
+                    demoAction('Transfer to savings account', 'money_finances', 5, 3),
                     demoAction('Cancel one unused subscription', 'money_finances', 10),
-                    demoAction('Research one investment option', 'money_finances', 25)
+                    demoAction('Research one investment option', 'money_finances', 25, 5)
                 ]},
                 // Career & Contribution
                 { id: 'do_career', result: 'Grow My Career', purpose: 'Make meaningful progress every week', category: 'career_contribution', actions: [
-                    demoAction('Work on portfolio project 30 min', 'career_contribution', 30),
-                    demoAction('Apply to one job', 'career_contribution', 45),
-                    demoAction('Update LinkedIn profile', 'career_contribution', 20),
+                    demoAction('Work on portfolio project 30 min', 'career_contribution', 30, 0),
+                    demoAction('Apply to one job', 'career_contribution', 45, 1),
+                    demoAction('Update LinkedIn profile', 'career_contribution', 20, 4),
                     demoAction('Learn one new skill or tool', 'career_contribution', 30)
                 ]},
                 // Personal Growth
                 { id: 'do_growth', result: 'Invest in My Growth', purpose: 'Become 1% better every day', category: 'personal_growth', actions: [
-                    demoAction('Read 20 minutes', 'personal_growth', 20),
-                    demoAction('Listen to a podcast or audiobook', 'personal_growth', 30),
-                    demoAction('Journal for 10 minutes', 'personal_growth', 10),
-                    demoAction('Practice a language 15 min', 'personal_growth', 15),
+                    demoAction('Read 20 minutes', 'personal_growth', 20, 0),
+                    demoAction('Listen to a podcast or audiobook', 'personal_growth', 30, 2),
+                    demoAction('Journal for 10 minutes', 'personal_growth', 10, 1),
+                    demoAction('Practice a language 15 min', 'personal_growth', 15, 3),
                     demoAction('Complete one online lesson', 'personal_growth', 25)
                 ]},
                 // Fun & Environment
                 { id: 'do_fun', result: 'Create a Space I Love', purpose: 'Live in a clean, inspiring environment', category: 'fun_environment', actions: [
-                    demoAction('Declutter one drawer or shelf', 'fun_environment', 15),
-                    demoAction('Clean desk and workspace', 'fun_environment', 20),
+                    demoAction('Declutter one drawer or shelf', 'fun_environment', 15, 1),
+                    demoAction('Clean desk and workspace', 'fun_environment', 20, 0),
                     demoAction('Do something fun just for me', 'fun_environment', 30),
-                    demoAction('Buy one thing that makes home nicer', 'fun_environment', 15)
+                    demoAction('Buy one thing that makes home nicer', 'fun_environment', 15, 5)
                 ]}
             ];
 
