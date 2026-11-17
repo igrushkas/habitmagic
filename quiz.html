@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Quiz - My Habit Magic</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --text-primary: #f0f0f5;
+            --text-secondary: #9999b0;
+            --text-muted: #707088;
+            --accent-primary: #7c6fba;
+            --accent-green: #4ecdc4;
+            --border: #252535;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0 16px;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 32px 0 64px;
+        }
+        .back-link {
+            display: inline-block;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .quiz-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .quiz-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-primary);
+            border-radius: 3px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .progress-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Question */
+        .question-screen {
+            display: none;
+        }
+        .question-screen.active {
+            display: block;
+        }
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            position: relative;
+        }
+        .option-card:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+        .option-card.selected {
+            border-color: var(--accent-primary);
+            background: rgba(124, 111, 186, 0.15);
+            color: var(--text-primary);
+        }
+        .option-card input {
+            display: none;
+        }
+
+        /* Result screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+        }
+        .result-screen.active {
+            display: block;
+        }
+        .result-emoji {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        .result-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .result-score {
+            font-size: 1rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .result-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .result-cta {
+            display: inline-block;
+            background: var(--accent-primary);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .result-cta:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+        .share-section {
+            margin-top: 28px;
+        }
+        .share-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 10px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .share-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+        .share-btn.copied {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        .retake-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
+        .retake-link:hover { color: var(--text-secondary); }
+
+        .footer-legal {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 48px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .footer-legal a:hover { color: var(--accent-primary); }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+    <a href="/" class="back-link">&larr; Back to app</a>
+
+    <div class="quiz-header">
+        <h1>How's Your Focus?</h1>
+        <p>A 2-minute self-check. No judgment, just insight.</p>
+    </div>
+
+    <div id="quizArea">
+        <div class="progress-text" id="progressText">Question 1 of 8</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="question-screen active" data-q="0">
+            <div class="question-text">When you have a free hour, you usually...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q0" value="1"><span>Make a plan and start the most important task</span></label>
+                <label class="option-card"><input type="radio" name="q0" value="2"><span>Scroll your phone trying to decide what to do</span></label>
+                <label class="option-card"><input type="radio" name="q0" value="3"><span>Start something but switch to something else within 10 min</span></label>
+                <label class="option-card"><input type="radio" name="q0" value="4"><span>Feel overwhelmed by all the things you could do and do nothing</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="1">
+            <div class="question-text">Your to-do list usually looks like...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q1" value="1"><span>5&ndash;7 clear, prioritized items</span></label>
+                <label class="option-card"><input type="radio" name="q1" value="2"><span>A long list that keeps growing</span></label>
+                <label class="option-card"><input type="radio" name="q1" value="3"><span>Scattered across notes, apps, and sticky notes</span></label>
+                <label class="option-card"><input type="radio" name="q1" value="4"><span>What to-do list? It&rsquo;s all in my head</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="2">
+            <div class="question-text">When a task feels big or boring, you...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q2" value="1"><span>Break it into smaller steps and start</span></label>
+                <label class="option-card"><input type="radio" name="q2" value="2"><span>Put it off until it&rsquo;s urgent</span></label>
+                <label class="option-card"><input type="radio" name="q2" value="3"><span>Do easier tasks first and hope motivation comes</span></label>
+                <label class="option-card"><input type="radio" name="q2" value="4"><span>Avoid it completely and feel guilty</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="3">
+            <div class="question-text">How often do you finish what you start?</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q3" value="1"><span>Almost always</span></label>
+                <label class="option-card"><input type="radio" name="q3" value="2"><span>Most of the time, with effort</span></label>
+                <label class="option-card"><input type="radio" name="q3" value="3"><span>About half the time</span></label>
+                <label class="option-card"><input type="radio" name="q3" value="4"><span>I have dozens of half-finished projects</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="4">
+            <div class="question-text">At the end of the day, you usually feel...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q4" value="1"><span>Satisfied with what I accomplished</span></label>
+                <label class="option-card"><input type="radio" name="q4" value="2"><span>Like I was busy but didn&rsquo;t do the important stuff</span></label>
+                <label class="option-card"><input type="radio" name="q4" value="3"><span>Tired but unsure where the time went</span></label>
+                <label class="option-card"><input type="radio" name="q4" value="4"><span>Frustrated that I didn&rsquo;t do what I planned</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="5">
+            <div class="question-text">When someone gives you advice like &ldquo;just make a plan&rdquo;...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q5" value="1"><span>That works for me!</span></label>
+                <label class="option-card"><input type="radio" name="q5" value="2"><span>I make plans but struggle to follow them</span></label>
+                <label class="option-card"><input type="radio" name="q5" value="3"><span>Plans feel overwhelming to even create</span></label>
+                <label class="option-card"><input type="radio" name="q5" value="4"><span>I&rsquo;ve tried every system and none stick</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="6">
+            <div class="question-text">Your relationship with deadlines is...</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q6" value="1"><span>I finish early or on time</span></label>
+                <label class="option-card"><input type="radio" name="q6" value="2"><span>I usually make it, with last-minute stress</span></label>
+                <label class="option-card"><input type="radio" name="q6" value="3"><span>I often need extensions</span></label>
+                <label class="option-card"><input type="radio" name="q6" value="4"><span>Deadlines? I work best under panic</span></label>
+            </div>
+        </div>
+
+        <div class="question-screen" data-q="7">
+            <div class="question-text">How many habit/productivity apps have you tried?</div>
+            <div class="options">
+                <label class="option-card"><input type="radio" name="q7" value="1"><span>1&ndash;2 and they work fine</span></label>
+                <label class="option-card"><input type="radio" name="q7" value="2"><span>3&ndash;5, still looking for the right one</span></label>
+                <label class="option-card"><input type="radio" name="q7" value="3"><span>6&ndash;10, nothing sticks</span></label>
+                <label class="option-card"><input type="radio" name="q7" value="4"><span>I&rsquo;ve lost count</span></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-screen" id="resultScreen">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <div class="result-title" id="resultTitle"></div>
+        <div class="result-score" id="resultScore"></div>
+        <div class="result-desc" id="resultDesc"></div>
+        <a href="/" class="result-cta">Try Habit Magic Free</a>
+        <div class="share-section">
+            <button class="share-btn" id="shareBtn">Share your results</button>
+        </div>
+        <button class="retake-link" id="retakeBtn">Retake quiz</button>
+    </div>
+
+    <div class="footer-legal">
+        <p>&copy; 2026 My Habit Magic &middot; <a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
+    </div>
+</div>
+
+<script>
+(function() {
+    var totalQuestions = 8;
+    var currentQuestion = 0;
+    var answers = [];
+
+    var screens = document.querySelectorAll('.question-screen');
+    var progressFill = document.getElementById('progressFill');
+    var progressText = document.getElementById('progressText');
+    var quizArea = document.getElementById('quizArea');
+    var resultScreen = document.getElementById('resultScreen');
+
+    function updateProgress() {
+        var pct = ((currentQuestion) / totalQuestions) * 100;
+        progressFill.style.width = pct + '%';
+        progressText.textContent = 'Question ' + (currentQuestion + 1) + ' of ' + totalQuestions;
+    }
+
+    function showQuestion(index) {
+        for (var i = 0; i < screens.length; i++) {
+            screens[i].classList.remove('active');
+        }
+        if (index < screens.length) {
+            screens[index].classList.add('active');
+            currentQuestion = index;
+            updateProgress();
+        }
+    }
+
+    function showResult() {
+        var total = 0;
+        for (var i = 0; i < answers.length; i++) {
+            total += answers[i];
+        }
+
+        var emoji, title, desc;
+        if (total <= 12) {
+            emoji = '🎯';
+            title = 'Focused & Steady';
+            desc = 'You’ve got solid habits and a system that works. Habit Magic can help you level up with gamified tracking, streaks, and badges — turning good habits into a game you actually want to play.';
+        } else if (total <= 20) {
+            emoji = '🚀';
+            title = 'Getting There';
+            desc = 'Your foundation is good but consistency is the challenge. You know what to do — doing it every day is the hard part. Habit Magic’s streak system and daily focus feature are built exactly for this.';
+        } else if (total <= 28) {
+            emoji = '⚡';
+            title = 'Busy Brain';
+            desc = 'You have the ambition but your brain needs structure it doesn’t fight against. Habit Magic shows you ONE task at a time — no overwhelm, just action. The panic button is there when you feel stuck.';
+        } else {
+            emoji = '🌪️';
+            title = 'Chaos Mode';
+            desc = 'Traditional tools weren’t built for brains like yours. Habit Magic uses dopamine hits, a panic button with 15+ strategies, and micro-tasks to actually get you moving. No guilt. No judgment. Just momentum.';
+        }
+
+        quizArea.style.display = 'none';
+        resultScreen.classList.add('active');
+        document.getElementById('resultEmoji').textContent = emoji;
+        document.getElementById('resultTitle').textContent = title;
+        document.getElementById('resultScore').textContent = 'Your score: ' + total + ' / 32';
+        document.getElementById('resultDesc').textContent = desc;
+
+        progressFill.style.width = '100%';
+        progressText.textContent = 'Complete!';
+    }
+
+    var optionCards = document.querySelectorAll('.option-card');
+    for (var i = 0; i < optionCards.length; i++) {
+        optionCards[i].addEventListener('click', function() {
+            var input = this.querySelector('input');
+            if (!input) return;
+            input.checked = true;
+            var value = parseInt(input.value, 10);
+
+            var siblings = this.parentNode.querySelectorAll('.option-card');
+            for (var j = 0; j < siblings.length; j++) {
+                siblings[j].classList.remove('selected');
+            }
+            this.classList.add('selected');
+
+            answers[currentQuestion] = value;
+
+            setTimeout(function() {
+                if (currentQuestion < totalQuestions - 1) {
+                    showQuestion(currentQuestion + 1);
+                } else {
+                    showResult();
+                }
+            }, 500);
+        });
+    }
+
+    document.getElementById('shareBtn').addEventListener('click', function() {
+        var total = 0;
+        for (var i = 0; i < answers.length; i++) {
+            total += answers[i];
+        }
+        var text = 'I scored ' + total + '/32 on the Focus Quiz! Take it: myhabitmagic.com/quiz.html';
+        var btn = this;
+        try {
+            navigator.clipboard.writeText(text).then(function() {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = 'Share your results';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function() {
+                fallbackSelect(text, btn);
+            });
+        } catch(e) {
+            fallbackSelect(text, btn);
+        }
+    });
+
+    function fallbackSelect(text, btn) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+                btn.textContent = 'Share your results';
+                btn.classList.remove('copied');
+            }, 2000);
+        } catch(e) {
+            btn.textContent = 'Select & copy the text above';
+        }
+        document.body.removeChild(ta);
+    }
+
+    document.getElementById('retakeBtn').addEventListener('click', function() {
+        answers = [];
+        currentQuestion = 0;
+        resultScreen.classList.remove('active');
+        quizArea.style.display = 'block';
+        var allInputs = document.querySelectorAll('.option-card input');
+        for (var i = 0; i < allInputs.length; i++) {
+            allInputs[i].checked = false;
+        }
+        var allCards = document.querySelectorAll('.option-card');
+        for (var i = 0; i < allCards.length; i++) {
+            allCards[i].classList.remove('selected');
+        }
+        showQuestion(0);
+    });
+
+    updateProgress();
+})();
+</script>
+</body>
+</html>
