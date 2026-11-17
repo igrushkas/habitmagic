@@ -1735,16 +1735,30 @@
             ];
 
             demoSeed.log = [
-                { id: 'dl1',  date: today, text: 'Morning workout 20 min',          category: 'health_energy',        xp: 20, timestamp: Date.now() - 36000000 },
-                { id: 'dl2',  date: today, text: 'Read 20 minutes',                 category: 'personal_growth',      xp: 15, timestamp: Date.now() - 32400000 },
-                { id: 'dl3',  date: today, text: 'Call mom or a close friend',      category: 'relationships',        xp: 15, timestamp: Date.now() - 28800000 },
-                { id: 'dl4',  date: today, text: 'Review bank statements',          category: 'money_finances',       xp: 20, timestamp: Date.now() - 25200000 },
-                { id: 'dl5',  date: today, text: 'Work on portfolio project 30 min',category: 'career_contribution',  xp: 25, timestamp: Date.now() - 21600000 },
-                { id: 'dl6',  date: today, text: 'Clean desk and workspace',        category: 'fun_environment',      xp: 15, timestamp: Date.now() - 18000000 },
-                { id: 'dl7',  date: today, text: 'Drink 8 glasses of water',        category: 'health_energy',        xp: 10, timestamp: Date.now() - 14400000 },
-                { id: 'dl8',  date: today, text: 'Journal for 10 minutes',          category: 'personal_growth',      xp: 15, timestamp: Date.now() - 10800000 },
-                { id: 'dl9',  date: today, text: 'Set a weekly budget',             category: 'money_finances',       xp: 20, timestamp: Date.now() - 7200000  },
-                { id: 'dl10', date: today, text: 'Do something fun just for me',    category: 'fun_environment',      xp: 20, timestamp: Date.now() - 3600000  }
+                // Health & Energy (3)
+                { id: 'dl1',  date: today, text: 'Morning workout 20 min',           category: 'health_energy',       xp: 20, timestamp: Date.now() - 43200000 },
+                { id: 'dl2',  date: today, text: 'Drink 8 glasses of water',         category: 'health_energy',       xp: 10, timestamp: Date.now() - 36000000 },
+                { id: 'dl3',  date: today, text: 'Prep healthy meal',                category: 'health_energy',       xp: 15, timestamp: Date.now() - 28800000 },
+                // Relationships (3)
+                { id: 'dl4',  date: today, text: 'Call mom or a close friend',       category: 'relationships',       xp: 15, timestamp: Date.now() - 25200000 },
+                { id: 'dl5',  date: today, text: 'Plan a dinner or hangout',         category: 'relationships',       xp: 10, timestamp: Date.now() - 21600000 },
+                { id: 'dl6',  date: today, text: 'Write a thank you message',        category: 'relationships',       xp: 10, timestamp: Date.now() - 18000000 },
+                // Money & Finances (3)
+                { id: 'dl7',  date: today, text: 'Review bank statements',           category: 'money_finances',      xp: 20, timestamp: Date.now() - 14400000 },
+                { id: 'dl8',  date: today, text: 'Set a weekly budget',              category: 'money_finances',      xp: 20, timestamp: Date.now() - 12600000 },
+                { id: 'dl9',  date: today, text: 'Transfer to savings account',      category: 'money_finances',      xp: 15, timestamp: Date.now() - 10800000 },
+                // Career & Contribution (3)
+                { id: 'dl10', date: today, text: 'Work on portfolio project 30 min', category: 'career_contribution', xp: 25, timestamp: Date.now() - 9000000  },
+                { id: 'dl11', date: today, text: 'Apply to one job',                 category: 'career_contribution', xp: 30, timestamp: Date.now() - 7200000  },
+                { id: 'dl12', date: today, text: 'Update LinkedIn profile',          category: 'career_contribution', xp: 20, timestamp: Date.now() - 5400000  },
+                // Personal Growth (3)
+                { id: 'dl13', date: today, text: 'Read 20 minutes',                  category: 'personal_growth',     xp: 15, timestamp: Date.now() - 3600000  },
+                { id: 'dl14', date: today, text: 'Journal for 10 minutes',           category: 'personal_growth',     xp: 15, timestamp: Date.now() - 2700000  },
+                { id: 'dl15', date: today, text: 'Complete one online lesson',       category: 'personal_growth',     xp: 20, timestamp: Date.now() - 1800000  },
+                // Fun & Environment (3)
+                { id: 'dl16', date: today, text: 'Declutter one drawer or shelf',    category: 'fun_environment',     xp: 15, timestamp: Date.now() - 1200000  },
+                { id: 'dl17', date: today, text: 'Clean desk and workspace',         category: 'fun_environment',     xp: 15, timestamp: Date.now() - 600000   },
+                { id: 'dl18', date: today, text: 'Do something fun just for me',     category: 'fun_environment',     xp: 20, timestamp: Date.now() - 300000   }
             ];
 
             localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
