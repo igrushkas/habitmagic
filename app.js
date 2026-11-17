@@ -1670,21 +1670,79 @@
             localStorage.setItem(DEMO_STARTED_KEY, new Date().toISOString());
         }
 
-        // Seed demo with sample log entries so Wheel of Life is visible from the start
+        // Seed demo with rich outcomes + log entries so Wheel, filters & Pick for Me all work
         if (!localStorage.getItem(OFFLINE_STORAGE_KEY)) {
             var today = new Date().toDateString();
             var demoSeed = defaultData();
-            demoSeed.streak = 3;
-            demoSeed.bestStreak = 5;
-            demoSeed.totalMomentum = 120;
-            demoSeed.log = [
-                { id: 'demo1', date: today, text: 'Morning workout', category: 'health_energy', xp: 20, timestamp: Date.now() - 36000000 },
-                { id: 'demo2', date: today, text: 'Read 20 minutes', category: 'personal_growth', xp: 15, timestamp: Date.now() - 28800000 },
-                { id: 'demo3', date: today, text: 'Called a friend', category: 'relationships', xp: 15, timestamp: Date.now() - 21600000 },
-                { id: 'demo4', date: today, text: 'Reviewed budget', category: 'money_finances', xp: 20, timestamp: Date.now() - 14400000 },
-                { id: 'demo5', date: today, text: 'Worked on side project', category: 'career_contribution', xp: 25, timestamp: Date.now() - 7200000 },
-                { id: 'demo6', date: today, text: 'Tidied up workspace', category: 'fun_environment', xp: 15, timestamp: Date.now() - 3600000 }
+            demoSeed.streak = 5;
+            demoSeed.bestStreak = 12;
+            demoSeed.totalMomentum = 340;
+
+            function demoAction(text, cat, mins) {
+                return { id: 'da_' + Math.random().toString(36).slice(2), text: text, categories: [cat], estMinutes: mins || 15, done: false, completedDate: null };
+            }
+
+            demoSeed.outcomes = [
+                // Health & Energy
+                { id: 'do_health', text: 'Build Daily Energy Habits', purpose: 'Feel strong and energized every day', category: 'health_energy', actions: [
+                    demoAction('Morning workout 20 min', 'health_energy', 20),
+                    demoAction('Drink 8 glasses of water', 'health_energy', 5),
+                    demoAction('Prep healthy meal', 'health_energy', 30),
+                    demoAction('Go for a 15 min walk', 'health_energy', 15),
+                    demoAction('Get 8 hours sleep', 'health_energy', 10)
+                ]},
+                // Relationships
+                { id: 'do_rel', text: 'Strengthen My Relationships', purpose: 'Stay connected with people I love', category: 'relationships', actions: [
+                    demoAction('Call mom or a close friend', 'relationships', 20),
+                    demoAction('Plan a dinner or hangout', 'relationships', 10),
+                    demoAction('Write a thank you message', 'relationships', 5),
+                    demoAction('Check in on someone I haven\'t spoken to', 'relationships', 10)
+                ]},
+                // Money & Finances
+                { id: 'do_money', text: 'Get My Finances in Order', purpose: 'Build financial security and peace of mind', category: 'money_finances', actions: [
+                    demoAction('Review bank statements', 'money_finances', 15),
+                    demoAction('Set a weekly budget', 'money_finances', 20),
+                    demoAction('Transfer to savings account', 'money_finances', 5),
+                    demoAction('Cancel one unused subscription', 'money_finances', 10),
+                    demoAction('Research one investment option', 'money_finances', 25)
+                ]},
+                // Career & Contribution
+                { id: 'do_career', text: 'Grow My Career', purpose: 'Make meaningful progress every week', category: 'career_contribution', actions: [
+                    demoAction('Work on portfolio project 30 min', 'career_contribution', 30),
+                    demoAction('Apply to one job', 'career_contribution', 45),
+                    demoAction('Update LinkedIn profile', 'career_contribution', 20),
+                    demoAction('Learn one new skill or tool', 'career_contribution', 30)
+                ]},
+                // Personal Growth
+                { id: 'do_growth', text: 'Invest in My Growth', purpose: 'Become 1% better every day', category: 'personal_growth', actions: [
+                    demoAction('Read 20 minutes', 'personal_growth', 20),
+                    demoAction('Listen to a podcast or audiobook', 'personal_growth', 30),
+                    demoAction('Journal for 10 minutes', 'personal_growth', 10),
+                    demoAction('Practice a language 15 min', 'personal_growth', 15),
+                    demoAction('Complete one online lesson', 'personal_growth', 25)
+                ]},
+                // Fun & Environment
+                { id: 'do_fun', text: 'Create a Space I Love', purpose: 'Live in a clean, inspiring environment', category: 'fun_environment', actions: [
+                    demoAction('Declutter one drawer or shelf', 'fun_environment', 15),
+                    demoAction('Clean desk and workspace', 'fun_environment', 20),
+                    demoAction('Do something fun just for me', 'fun_environment', 30),
+                    demoAction('Buy one thing that makes home nicer', 'fun_environment', 15)
+                ]}
             ];
+
+            demoSeed.log = [
+                { id: 'dl1',  date: today, text: 'Morning workout 20 min',          category: 'health_energy',        xp: 20, timestamp: Date.now() - 36000000 },
+                { id: 'dl2',  date: today, text: 'Read 20 minutes',                 category: 'personal_growth',      xp: 15, timestamp: Date.now() - 32400000 },
+                { id: 'dl3',  date: today, text: 'Call mom or a close friend',      category: 'relationships',        xp: 15, timestamp: Date.now() - 28800000 },
+                { id: 'dl4',  date: today, text: 'Review bank statements',          category: 'money_finances',       xp: 20, timestamp: Date.now() - 25200000 },
+                { id: 'dl5',  date: today, text: 'Work on portfolio project 30 min',category: 'career_contribution',  xp: 25, timestamp: Date.now() - 21600000 },
+                { id: 'dl6',  date: today, text: 'Clean desk and workspace',        category: 'fun_environment',      xp: 15, timestamp: Date.now() - 18000000 },
+                { id: 'dl7',  date: today, text: 'Drink 8 glasses of water',        category: 'health_energy',        xp: 10, timestamp: Date.now() - 14400000 },
+                { id: 'dl8',  date: today, text: 'Journal for 10 minutes',          category: 'personal_growth',      xp: 15, timestamp: Date.now() - 10800000 },
+                { id: 'dl9',  date: today, text: 'Set a weekly budget',             category: 'money_finances',       xp: 20, timestamp: Date.now() - 7200000  },
+                { id: 'dl10', date: today, text: 'Do something fun just for me',    category: 'fun_environment',      xp: 20, timestamp: Date.now() - 3600000  }
+            ];
+
             localStorage.setItem(OFFLINE_STORAGE_KEY, JSON.stringify(demoSeed));
         }
 
