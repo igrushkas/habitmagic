@@ -169,6 +169,11 @@
         .share-section {
             margin-top: 28px;
         }
+        .share-section h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
         .share-btn {
             background: var(--bg-card);
             border: 2px solid var(--border);
@@ -186,6 +191,31 @@
         .share-btn.copied {
             border-color: var(--accent-green);
             color: var(--accent-green);
+        }
+        .social-share-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+        .social-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .social-share-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
         }
         .retake-link {
             display: inline-block;
@@ -317,7 +347,15 @@
         <div class="result-desc" id="resultDesc"></div>
         <a href="/" class="result-cta">Try Habit Magic Free</a>
         <div class="share-section">
-            <button class="share-btn" id="shareBtn">Share your results</button>
+            <h3>Share My Habit Magic</h3>
+            <button class="share-btn" id="shareBtn">&#128203; Copy results to clipboard</button>
+            <div class="social-share-row">
+                <button class="social-share-btn" id="quizShareFacebook"><span>&#127760;</span> Facebook</button>
+                <button class="social-share-btn" id="quizShareTwitter"><span>&#120143;</span> Twitter</button>
+                <button class="social-share-btn" id="quizShareWhatsApp"><span>&#128172;</span> WhatsApp</button>
+                <button class="social-share-btn" id="quizShareTelegram"><span>&#9992;</span> Telegram</button>
+                <button class="social-share-btn" id="quizShareLinkedIn"><span>&#128188;</span> LinkedIn</button>
+            </div>
         </div>
         <button class="retake-link" id="retakeBtn">Retake quiz</button>
     </div>
@@ -453,7 +491,7 @@
             btn.textContent = 'Copied!';
             btn.classList.add('copied');
             setTimeout(function() {
-                btn.textContent = 'Share your results';
+                btn.textContent = '\u{1F4CB} Copy results to clipboard';
                 btn.classList.remove('copied');
             }, 2000);
         } catch(e) {
@@ -461,6 +499,27 @@
         }
         document.body.removeChild(ta);
     }
+
+    function getQuizShareText() {
+        var total = 0;
+        for (var i = 0; i < answers.length; i++) total += answers[i];
+        return 'I scored ' + total + '/32 on the Focus Quiz! How focused are you? Take it: myhabitmagic.com/quiz.html';
+    }
+    document.getElementById('quizShareFacebook').addEventListener('click', function() {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://myhabitmagic.com/quiz.html') + '&quote=' + encodeURIComponent(getQuizShareText()), '_blank');
+    });
+    document.getElementById('quizShareTwitter').addEventListener('click', function() {
+        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(getQuizShareText()), '_blank');
+    });
+    document.getElementById('quizShareWhatsApp').addEventListener('click', function() {
+        window.open('https://wa.me/?text=' + encodeURIComponent(getQuizShareText()), '_blank');
+    });
+    document.getElementById('quizShareTelegram').addEventListener('click', function() {
+        window.open('https://t.me/share/url?url=' + encodeURIComponent('https://myhabitmagic.com/quiz.html') + '&text=' + encodeURIComponent(getQuizShareText()), '_blank');
+    });
+    document.getElementById('quizShareLinkedIn').addEventListener('click', function() {
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent('https://myhabitmagic.com/quiz.html'), '_blank');
+    });
 
     document.getElementById('retakeBtn').addEventListener('click', function() {
         answers = [];
