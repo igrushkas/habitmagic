@@ -8479,9 +8479,10 @@
                     emailBody += '\nTime: ' + new Date().toISOString();
 
                     emailjs.send('service_ia7v9fh', 'template_locpj2l', {
-                        from_name: feedbackData.userEmail || 'Anonymous User',
-                        to_email: 'support@myhabitmagic.com',
-                        subject: 'Habit Magic Feedback: ' + (issues.length > 0 ? issues[0] : 'General'),
+                        name: feedbackData.userEmail || 'Anonymous User',
+                        email: feedbackData.userEmail || '',
+                        title: 'Habit Magic Feedback: ' + (issues.length > 0 ? issues[0] : 'General'),
+                        time: new Date().toLocaleString(),
                         message: emailBody
                     }).catch(function(emailErr) {
                         console.warn('EmailJS send failed (feedback still saved to Firestore):', emailErr);
