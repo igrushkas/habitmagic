@@ -8540,17 +8540,30 @@
                 setTimeout(function() { msg.classList.add('hidden'); }, 3000);
             }
         });
-        safeBind('btnShareWhatsApp', 'click', function() {
+        var shareMsg = 'I\u2019ve been using Habit Magic \u2014 a habit tracker that works with your brain, not against it. Founding member spots are limited! ';
+        safeBind('btnShareFacebook', 'click', function() {
             var link = getReferralLink();
-            window.open('https://wa.me/?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! ' + link), '_blank');
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(link) + '&quote=' + encodeURIComponent(shareMsg), '_blank');
         });
         safeBind('btnShareTwitter', 'click', function() {
             var link = getReferralLink();
-            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! ' + link), '_blank');
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareMsg + link), '_blank');
+        });
+        safeBind('btnShareWhatsApp', 'click', function() {
+            var link = getReferralLink();
+            window.open('https://wa.me/?text=' + encodeURIComponent(shareMsg + link), '_blank');
+        });
+        safeBind('btnShareTelegram', 'click', function() {
+            var link = getReferralLink();
+            window.open('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(shareMsg), '_blank');
+        });
+        safeBind('btnShareLinkedIn', 'click', function() {
+            var link = getReferralLink();
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(link), '_blank');
         });
         safeBind('btnShareEmail', 'click', function() {
             var link = getReferralLink();
-            window.location.href = 'mailto:?subject=' + encodeURIComponent('Check out Habit Magic') + '&body=' + encodeURIComponent('Hey! I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. It\u2019s really helping me stay on track. Founding member spots are limited \u2014 check it out: ' + link);
+            window.location.href = 'mailto:?subject=' + encodeURIComponent('Check out Habit Magic') + '&body=' + encodeURIComponent('Hey! ' + shareMsg + 'Check it out: ' + link);
         });
 
         if (firebaseReady) {
