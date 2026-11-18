@@ -8466,6 +8466,27 @@
                 setTimeout(function() {
                     document.getElementById('bugReportOverlay').classList.add('hidden');
                 }, 1500);
+
+                // Send email notification via EmailJS
+                if (window.emailjs) {
+                    var emailBody = 'New feedback from ' + (feedbackData.userEmail || 'Anonymous') + '\n\n';
+                    if (issues.length > 0) emailBody += 'Issues: ' + issues.join(', ') + '\n\n';
+                    Object.keys(sectionNotes).forEach(function(section) {
+                        emailBody += section + ': ' + sectionNotes[section] + '\n';
+                    });
+                    if (otherText) emailBody += '\nOther: ' + otherText;
+                    emailBody += '\n\nPage: ' + feedbackData.page;
+                    emailBody += '\nTime: ' + new Date().toISOString();
+
+                    emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', {
+                        from_name: feedbackData.userEmail || 'Anonymous User',
+                        to_email: 'support@myhabitmagic.com',
+                        subject: 'Habit Magic Feedback: ' + (issues.length > 0 ? issues[0] : 'General'),
+                        message: emailBody
+                    }).catch(function(emailErr) {
+                        console.warn('EmailJS send failed (feedback still saved to Firestore):', emailErr);
+                    });
+                }
             }).catch(function(err) {
                 console.error('Bug report save error:', err);
                 alert('Could not save report. Please try again.');
