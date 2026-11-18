@@ -82,7 +82,7 @@
 2. **Tier cap enforcement**: app.js does not enforce goal limits (3 Free / 10 Starter), badge locks, or streak caps yet. Everyone gets full access.
 3. **Paywall gate**: `isProUser()` returns `true` for everyone. No real tier checking.
 4. **Stripe webhooks**: Firebase Cloud Function still configured for Lemon Squeezy, not Stripe.
-5. **Referral rewards**: Tracking code exists but the actual reward (3 referrals = 1 free month) is not wired up.
+5. **Referral rewards**: Tracking code stores referrals in Firestore. No reward promised — will decide later.
 6. **Blog publishing**: Static HTML — new posts require manual editing of blog.html.
 7. **Google Search Console**: Sitemap submitted but property not yet verified by owner.
 8. **Contact email**: DONE — support@myhabitmagic.com (Titan Email, 1GB inbox)

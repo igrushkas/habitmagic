@@ -8093,7 +8093,7 @@
     }
 
     // ── Referral System ───────────────────────────────────────
-    var REFERRAL_REWARD_THRESHOLD = 3; // Refer 3 people = 1 free month
+    var REFERRAL_REWARD_THRESHOLD = 3;
 
     function getReferralCode() {
         if (!currentUser) return '';
@@ -8199,7 +8199,7 @@
                 '<button class="btn-secondary review-btn" id="btnShareReferral">&#128279; Share With a Friend</button>' +
             '</div>' +
             '<div class="referral-link-box">' +
-                '<p class="referral-label">Your referral link (refer 3 friends = free month):</p>' +
+                '<p class="referral-label">Your referral link:</p>' +
                 '<input type="text" class="input-field referral-input" value="' + refLink + '" readonly id="referralLinkInput">' +
                 '<button class="btn-secondary btn-copy-link" id="btnCopyReferral">Copy Link</button>' +
             '</div>' +
