@@ -80,7 +80,7 @@
 5. **Referral rewards**: Tracking code exists but the actual reward (3 referrals = 1 free month) is not wired up.
 6. **Blog publishing**: Static HTML — new posts require manual editing of blog.html.
 7. **Google Search Console**: Sitemap submitted but property not yet verified by owner.
-8. **Contact email**: No dedicated email (e.g. support@myhabitmagic.com) set up yet.
+8. ~~Contact email~~ **DONE**: support@myhabitmagic.com (1GB inbox via domain host)
 
 ## Feedback System
 - **Sends to**: Firebase Firestore, collection `bugs_and_feedback`
