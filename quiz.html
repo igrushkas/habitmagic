@@ -503,7 +503,7 @@
     function getQuizShareText() {
         var total = 0;
         for (var i = 0; i < answers.length; i++) total += answers[i];
-        return 'I scored ' + total + '/32 on the Focus Quiz! How focused are you? Take it: myhabitmagic.com/quiz.html';
+        return 'I scored ' + total + '/32 on the Focus Quiz! Turn Chaos Into Magic — how focused are you? Take it: myhabitmagic.com/quiz.html';
     }
     document.getElementById('quizShareFacebook').addEventListener('click', function() {
         window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://myhabitmagic.com/quiz.html') + '&quote=' + encodeURIComponent(getQuizShareText()), '_blank');

@@ -36,6 +36,11 @@
 - **Feature branch**: `claude/simplify-app-design-DFvRO`
 - **Deploy branch**: `master`
 
+## Branding
+- **Tagline/Slogan**: "Turn Chaos Into Magic"
+- **No ADHD language** — use "busy brains" / inclusive language everywhere
+- **Contact**: support@myhabitmagic.com (Titan Email, 1GB)
+
 ## Tech Stack
 - Frontend: Vanilla JS, CSS (no framework)
 - Backend: Firebase Auth (Google OAuth) + Firestore
@@ -77,12 +82,28 @@
 2. **Tier cap enforcement**: app.js does not enforce goal limits (3 Free / 10 Starter), badge locks, or streak caps yet. Everyone gets full access.
 3. **Paywall gate**: `isProUser()` returns `true` for everyone. No real tier checking.
 4. **Stripe webhooks**: Firebase Cloud Function still configured for Lemon Squeezy, not Stripe.
-5. **Referral rewards**: Tracking code exists but the actual reward (3 referrals = 1 free month) is not wired up.
+5. **Referral rewards**: Tracking code stores referrals in Firestore. No reward promised — will decide later.
 6. **Blog publishing**: Static HTML — new posts require manual editing of blog.html.
 7. **Google Search Console**: Sitemap submitted but property not yet verified by owner.
-8. ~~Contact email~~ **DONE**: support@myhabitmagic.com (1GB inbox via domain host)
+8. **Contact email**: DONE — support@myhabitmagic.com (Titan Email, 1GB inbox)
 
 ## Feedback System
-- **Sends to**: Firebase Firestore, collection `bugs_and_feedback`
+- **Sends to**: Firebase Firestore, collection `bugs_and_feedback` + email notification via EmailJS
+- **Email destination**: support@myhabitmagic.com (Titan Email)
+- **Email relay**: EmailJS (free tier — 200 emails/month, 2 templates)
 - **Data collected**: Checked issues (per section), section comments, user email, page URL, user agent, timestamp
-- **Access**: View in Firebase Console > Firestore > bugs_and_feedback collection
+- **Access**: View in Firebase Console > Firestore > bugs_and_feedback collection, or check support@myhabitmagic.com inbox
+
+### EmailJS Setup Required
+To activate email notifications, the owner must:
+1. Create a free account at https://www.emailjs.com
+2. Add an Email Service → "Other SMTP" with Titan settings:
+   - SMTP Host: `smtp.titan.email`
+   - Port: `465` (SSL)
+   - Username: `support@myhabitmagic.com`
+   - Password: (Titan email password)
+3. Create an Email Template with these variables: `{{from_name}}`, `{{to_email}}`, `{{subject}}`, `{{message}}`
+4. Replace 3 placeholders in the code:
+   - `index.html`: Replace `YOUR_EMAILJS_PUBLIC_KEY` with the Public Key from EmailJS Dashboard > Account
+   - `app.js`: Replace `YOUR_EMAILJS_SERVICE_ID` with the Service ID from step 2
+   - `app.js`: Replace `YOUR_EMAILJS_TEMPLATE_ID` with the Template ID from step 3

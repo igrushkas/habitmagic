@@ -55,8 +55,8 @@ Replace Lemon Squeezy placeholder checkout URLs with Stripe Payment Links. Updat
 ### 6. Founders Price Lock-In ($4.99/mo Forever)
 Early adopters/founding members get locked in at a special price to create urgency. The founding member badge + counter system already exists, but no special pricing tier is coded.
 
-### 7. Referral Reward Logic (3 Referrals = 1 Free Month)
-Referral tracking system is BUILT (unique codes, Firestore tracking, atomic counters). The actual REWARD -- granting 1 free month to users who refer 3 people -- is NOT wired up yet.
+### 7. Referral System
+Referral tracking system is BUILT (unique codes, Firestore tracking, atomic counters). No reward promised to users yet — referrals are stored silently for now. Reward to be decided later.
 
 ### 8. Smart Upgrade Nudge at Engagement Peak
 Show message around day 10-11 of trial: "Your streak is 11 days -- sign up to keep it forever." Trigger conversion at the emotional peak when user is most engaged.

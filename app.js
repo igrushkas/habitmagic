@@ -590,7 +590,7 @@
           check: function(d) { var c = 0; d.outcomes.forEach(function(o) { if (o.completed) c++; }); if (d.archived) d.archived.forEach(function(o) { if (o.completed) c++; }); return c >= 5; } },
         { id: 'momentum_500',    name: 'Momentum 500',     emoji: '🚂', desc: 'Reach 500 momentum points', xp: 75, type: 'permanent',
           check: function(d) { return d.totalMomentum >= 500; } },
-        { id: 'founding_member',  name: 'Founding Member',  emoji: '🌟', desc: 'One of the first 100 users', xp: 500, type: 'permanent',
+        { id: 'founding_member',  name: 'Founding Member',  emoji: '🌟', desc: 'One of the first 50 users', xp: 500, type: 'permanent',
           check: function() { return isFoundingMember; } }
     ];
 
@@ -1561,7 +1561,7 @@
             if (remaining === 0) {
                 var heroSpots = document.querySelector('.hero-spots');
                 if (heroSpots) {
-                    heroSpots.innerHTML = '<span class="spots-full-badge">All 100 Founding Member spots are filled!</span>' +
+                    heroSpots.innerHTML = '<span class="spots-full-badge">All 50 Founding Member spots are filled!</span>' +
                         '<span class="spots-full-sub">Sign up for a free 2-week trial \u2014 if a spot opens, we\u2019ll email you.</span>';
                 }
                 var earlySpots = document.querySelector('.early-adopter-spots');
@@ -7781,7 +7781,7 @@
     var foundingMemberCount = 0;
     var isFoundingMember = false;
     var isTrialUser = false;
-    var FOUNDING_MEMBER_LIMIT = 100;
+    var FOUNDING_MEMBER_LIMIT = 50;
     var TRIAL_DURATION_DAYS = 14;
 
     function loadFoundingMemberCount(callback) {
@@ -8093,7 +8093,7 @@
     }
 
     // ── Referral System ───────────────────────────────────────
-    var REFERRAL_REWARD_THRESHOLD = 3; // Refer 3 people = 1 free month
+    var REFERRAL_REWARD_THRESHOLD = 3;
 
     function getReferralCode() {
         if (!currentUser) return '';
@@ -8199,7 +8199,7 @@
                 '<button class="btn-secondary review-btn" id="btnShareReferral">&#128279; Share With a Friend</button>' +
             '</div>' +
             '<div class="referral-link-box">' +
-                '<p class="referral-label">Your referral link (refer 3 friends = free month):</p>' +
+                '<p class="referral-label">Your referral link:</p>' +
                 '<input type="text" class="input-field referral-input" value="' + refLink + '" readonly id="referralLinkInput">' +
                 '<button class="btn-secondary btn-copy-link" id="btnCopyReferral">Copy Link</button>' +
             '</div>' +
@@ -8466,6 +8466,27 @@
                 setTimeout(function() {
                     document.getElementById('bugReportOverlay').classList.add('hidden');
                 }, 1500);
+
+                // Send email notification via EmailJS
+                if (window.emailjs) {
+                    var emailBody = 'New feedback from ' + (feedbackData.userEmail || 'Anonymous') + '\n\n';
+                    if (issues.length > 0) emailBody += 'Issues: ' + issues.join(', ') + '\n\n';
+                    Object.keys(sectionNotes).forEach(function(section) {
+                        emailBody += section + ': ' + sectionNotes[section] + '\n';
+                    });
+                    if (otherText) emailBody += '\nOther: ' + otherText;
+                    emailBody += '\n\nPage: ' + feedbackData.page;
+                    emailBody += '\nTime: ' + new Date().toISOString();
+
+                    emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', {
+                        from_name: feedbackData.userEmail || 'Anonymous User',
+                        to_email: 'support@myhabitmagic.com',
+                        subject: 'Habit Magic Feedback: ' + (issues.length > 0 ? issues[0] : 'General'),
+                        message: emailBody
+                    }).catch(function(emailErr) {
+                        console.warn('EmailJS send failed (feedback still saved to Firestore):', emailErr);
+                    });
+                }
             }).catch(function(err) {
                 console.error('Bug report save error:', err);
                 alert('Could not save report. Please try again.');
@@ -8540,7 +8561,7 @@
                 setTimeout(function() { msg.classList.add('hidden'); }, 3000);
             }
         });
-        var shareMsg = 'I\u2019ve been using Habit Magic \u2014 a habit tracker that works with your brain, not against it. Founding member spots are limited! ';
+        var shareMsg = 'Turn Chaos Into Magic \u2014 I\u2019ve been using Habit Magic to actually get stuff done. Founding member spots are limited! ';
         safeBind('btnShareFacebook', 'click', function() {
             var link = getReferralLink();
             window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(link) + '&quote=' + encodeURIComponent(shareMsg), '_blank');
