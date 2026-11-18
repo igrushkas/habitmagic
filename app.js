@@ -8478,7 +8478,7 @@
                     emailBody += '\n\nPage: ' + feedbackData.page;
                     emailBody += '\nTime: ' + new Date().toISOString();
 
-                    emailjs.send('YOUR_EMAILJS_SERVICE_ID', 'YOUR_EMAILJS_TEMPLATE_ID', {
+                    emailjs.send('service_ia7v9fh', 'template_locpj2l', {
                         from_name: feedbackData.userEmail || 'Anonymous User',
                         to_email: 'support@myhabitmagic.com',
                         subject: 'Habit Magic Feedback: ' + (issues.length > 0 ? issues[0] : 'General'),
