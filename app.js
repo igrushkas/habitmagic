@@ -590,7 +590,7 @@
           check: function(d) { var c = 0; d.outcomes.forEach(function(o) { if (o.completed) c++; }); if (d.archived) d.archived.forEach(function(o) { if (o.completed) c++; }); return c >= 5; } },
         { id: 'momentum_500',    name: 'Momentum 500',     emoji: '🚂', desc: 'Reach 500 momentum points', xp: 75, type: 'permanent',
           check: function(d) { return d.totalMomentum >= 500; } },
-        { id: 'founding_member',  name: 'Founding Member',  emoji: '🌟', desc: 'One of the first 100 users', xp: 500, type: 'permanent',
+        { id: 'founding_member',  name: 'Founding Member',  emoji: '🌟', desc: 'One of the first 50 users', xp: 500, type: 'permanent',
           check: function() { return isFoundingMember; } }
     ];
 
@@ -1561,7 +1561,7 @@
             if (remaining === 0) {
                 var heroSpots = document.querySelector('.hero-spots');
                 if (heroSpots) {
-                    heroSpots.innerHTML = '<span class="spots-full-badge">All 100 Founding Member spots are filled!</span>' +
+                    heroSpots.innerHTML = '<span class="spots-full-badge">All 50 Founding Member spots are filled!</span>' +
                         '<span class="spots-full-sub">Sign up for a free 2-week trial \u2014 if a spot opens, we\u2019ll email you.</span>';
                 }
                 var earlySpots = document.querySelector('.early-adopter-spots');
@@ -7781,7 +7781,7 @@
     var foundingMemberCount = 0;
     var isFoundingMember = false;
     var isTrialUser = false;
-    var FOUNDING_MEMBER_LIMIT = 100;
+    var FOUNDING_MEMBER_LIMIT = 50;
     var TRIAL_DURATION_DAYS = 14;
 
     function loadFoundingMemberCount(callback) {
