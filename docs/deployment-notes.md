@@ -36,6 +36,11 @@
 - **Feature branch**: `claude/simplify-app-design-DFvRO`
 - **Deploy branch**: `master`
 
+## Branding
+- **Tagline/Slogan**: "Turn Chaos Into Magic"
+- **No ADHD language** — use "busy brains" / inclusive language everywhere
+- **Contact**: support@myhabitmagic.com (Titan Email, 1GB)
+
 ## Tech Stack
 - Frontend: Vanilla JS, CSS (no framework)
 - Backend: Firebase Auth (Google OAuth) + Firestore

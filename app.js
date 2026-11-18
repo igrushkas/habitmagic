@@ -8561,7 +8561,7 @@
                 setTimeout(function() { msg.classList.add('hidden'); }, 3000);
             }
         });
-        var shareMsg = 'I\u2019ve been using Habit Magic \u2014 a habit tracker that works with your brain, not against it. Founding member spots are limited! ';
+        var shareMsg = 'Turn Chaos Into Magic \u2014 I\u2019ve been using Habit Magic to actually get stuff done. Founding member spots are limited! ';
         safeBind('btnShareFacebook', 'click', function() {
             var link = getReferralLink();
             window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(link) + '&quote=' + encodeURIComponent(shareMsg), '_blank');
