@@ -94,16 +94,10 @@
 - **Data collected**: Checked issues (per section), section comments, user email, page URL, user agent, timestamp
 - **Access**: View in Firebase Console > Firestore > bugs_and_feedback collection, or check support@myhabitmagic.com inbox
 
-### EmailJS Setup Required
-To activate email notifications, the owner must:
-1. Create a free account at https://www.emailjs.com
-2. Add an Email Service → "Other SMTP" with Titan settings:
-   - SMTP Host: `smtp.titan.email`
-   - Port: `465` (SSL)
-   - Username: `support@myhabitmagic.com`
-   - Password: (Titan email password)
-3. Create an Email Template with these variables: `{{from_name}}`, `{{to_email}}`, `{{subject}}`, `{{message}}`
-4. Replace 3 placeholders in the code:
-   - `index.html`: Replace `YOUR_EMAILJS_PUBLIC_KEY` with the Public Key from EmailJS Dashboard > Account
-   - `app.js`: Replace `YOUR_EMAILJS_SERVICE_ID` with the Service ID from step 2
-   - `app.js`: Replace `YOUR_EMAILJS_TEMPLATE_ID` with the Template ID from step 3
+### EmailJS Setup (DONE)
+- **Account**: emailjs.com (free tier, 200 emails/month, resets monthly)
+- **Service**: SMTP via Titan Email (smtp.titan.email:465 SSL) — Service ID: `service_ia7v9fh`
+- **Template**: "Contact Us" — Template ID: `template_locpj2l`
+- **Template variables**: `{{name}}`, `{{email}}`, `{{title}}`, `{{time}}`, `{{message}}`
+- **Public Key**: `4sPwRxcT_5aTtvwyf` (in index.html)
+- **Code**: Keys wired in index.html + app.js (no placeholders remaining)
