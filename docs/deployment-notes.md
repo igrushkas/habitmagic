@@ -43,6 +43,46 @@
 - Payments: Lemon Squeezy placeholder URLs in code (migration to Stripe planned — awaiting Stripe Payment Links from owner)
 - Webhook: Firebase Cloud Function for payment webhook (currently Lemon Squeezy, will need updating for Stripe)
 
+## Backups
+
+### Git Tag Backup
+- **Tag**: `backup-before-merge-20261117-221405` — snapshot of feature branch before merging to master (Nov 17 2026)
+- Restore: `git checkout backup-before-merge-20261117-221405`
+
+### File Backups (in repo)
+- **`/backup/`** — Original master files from Nov 7 2026 (app.js.bak, index.html.bak, styles.css.bak, minified versions)
+- **`/before/`** — Pre-redesign master files from Nov 7 2026 (app.min.js, firebase-config.js, index.html, manifest.json, styles.min.css)
+
+### Git Branch Backup
+- **`claude/backup-master-DFvRO`** — Full copy of original master before any changes
+
+### What Changed Before Backup (Nov 7-17, 2026)
+1. **UI redesign**: Single-task focus, maximized focus mode, simplified forms, 20px rounded buttons, typography consolidation
+2. **Pricing tiers with caps**: Free (3 goals, 5 badges), Starter (10 goals, 12 badges, Focus Timer, Panic Button), Pro (unlimited, Pick For Me, priority support)
+3. **Branding**: Removed all ADHD references, replaced with "busy brains" / inclusive language
+4. **Legal pages**: /terms.html (30-day refund, founding member program), /privacy.html (GA4 disclosure)
+5. **Google Analytics**: GA4 (G-QYPMGS8DKZ) installed on all pages
+6. **SEO**: sitemap.xml, robots.txt, Open Graph meta tags
+7. **Content pages**: /resources.html (8 strategies), /quiz.html (focus quiz), /blog.html (3 articles)
+8. **Landing page fixes**: meta description, badge count (18), Pick For Me copy, help section rewrite
+9. **Service worker**: Caches all new pages, fixed source file references
+10. **Demo mode**: All 4 mode tabs unlocked, badge seeds, stats, wheel data populated
+
 ## Business Status
-- **IRS EIN**: Pending — owner cannot reach IRS to create EIN. Required before finalizing Stripe setup.
+- **IRS EIN**: Pending — owner calling IRS Nov 18 2026. Required before finalizing Stripe setup.
 - **Stripe migration**: Blocked on EIN + owner providing Stripe Payment Links for 4 products (Starter monthly/annual, Pro monthly/annual)
+
+## What Is NOT Working Yet
+1. **Stripe checkout**: URLs are still Lemon Squeezy placeholders. Buttons go to dead links. Blocked on owner providing Stripe Payment Links.
+2. **Tier cap enforcement**: app.js does not enforce goal limits (3 Free / 10 Starter), badge locks, or streak caps yet. Everyone gets full access.
+3. **Paywall gate**: `isProUser()` returns `true` for everyone. No real tier checking.
+4. **Stripe webhooks**: Firebase Cloud Function still configured for Lemon Squeezy, not Stripe.
+5. **Referral rewards**: Tracking code exists but the actual reward (3 referrals = 1 free month) is not wired up.
+6. **Blog publishing**: Static HTML — new posts require manual editing of blog.html.
+7. **Google Search Console**: Sitemap submitted but property not yet verified by owner.
+8. **Contact email**: No dedicated email (e.g. support@myhabitmagic.com) set up yet.
+
+## Feedback System
+- **Sends to**: Firebase Firestore, collection `bugs_and_feedback`
+- **Data collected**: Checked issues (per section), section comments, user email, page URL, user agent, timestamp
+- **Access**: View in Firebase Console > Firestore > bugs_and_feedback collection
